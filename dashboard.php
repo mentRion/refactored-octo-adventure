@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['Admin-name'])) {
-  header("location: login.php");
+  header("location: login2.php");
 }
 ?>
 <!doctype html>
@@ -78,7 +78,7 @@ if (!isset($_SESSION['Admin-name'])) {
                     echo '</li>';
                 }
                 else{
-                    echo '<a href="login.php">Log In</a>';
+                    echo '<a href="login2.php">Log In</a>';
                 }
             ?>
           </ul>
@@ -224,18 +224,18 @@ if (!isset($_SESSION['Admin-name'])) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Update Account</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       <form action="ac_update.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-body">
 	      	<label for="User-mail"><b>Admin Name:</b></label>
-	      	<input type="text" name="up_name" placeholder="Enter your Name..." value="<?php echo $_SESSION['Admin-name']; ?>" required/><br>
+	      	<input class="form-control" type="text" name="up_name" placeholder="Enter your Name..." value="<?php echo $_SESSION['Admin-name']; ?>" required/><br>
 	      	<label for="User-mail"><b>Admin E-mail:</b></label>
-	      	<input type="email" name="up_email" placeholder="Enter your E-mail..." value="<?php echo $_SESSION['Admin-email']; ?>" required/><br>
+	      	<input class="form-control" type="email" name="up_email" placeholder="Enter your E-mail..." value="<?php echo $_SESSION['Admin-email']; ?>" required/><br>
 	      	<label for="User-psw"><b>Password</b></label>
-	      	<input type="password" name="up_pwd" placeholder="Enter your Password..." required/><br>
+	      	<input class="form-control" type="password" name="up_pwd" placeholder="Enter your Password..." required/><br>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="submit" name="update" class="btn btn-success">Save changes</button>

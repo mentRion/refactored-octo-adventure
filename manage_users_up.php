@@ -1,5 +1,5 @@
 <div class="table-responsive-sm" style="max-height: 870px;"> 
-  <table class="table">
+  <table id="example" class="table">
     <thead class="table-primary">
       <tr>
         <th>Card UID</th>

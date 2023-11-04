@@ -1,11 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['Admin-name'])) {
-  header("location: login.php");
+  header("location: login2.php");
 }
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,7 @@ if (!isset($_SESSION['Admin-name'])) {
   <!-- Bootstrap core CSS -->
   <link href="./css/bootstrap.min.css" rel="stylesheet">
 
-  
+
 
 
   <style>
@@ -38,11 +39,12 @@ if (!isset($_SESSION['Admin-name'])) {
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 </head>
+
 <body>
 
 
 
-<header>
+  <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
       <div class="container-fluid">
         <a class="navbar-brand" href="dashboard.php">Avionics</a>
@@ -64,51 +66,42 @@ if (!isset($_SESSION['Admin-name'])) {
             <li class="nav-item">
               <a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
             </li>
-            <?php  
-                if (isset($_SESSION['Admin-name'])) {
-                    // echo '<li class="nav-item">';
-                    // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
-                    // echo '</li>';
-                    // echo '<li class="nav-item">';
-                    // echo '<a class="nav-link" href="logout.php">Log Out</a>';
-                    // echo '</li>';
-                    
-                    echo '<li type="" class="nav-item">';
-                    echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
-                    echo '</li>';
+            <?php
+            if (isset($_SESSION['Admin-name'])) {
+              // echo '<li class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
+              // echo '</li>';
+              // echo '<li class="nav-item">';
+              // echo '<a class="nav-link" href="logout.php">Log Out</a>';
+              // echo '</li>';
+            
+              echo '<li type="" class="nav-item">';
+              echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              echo '</li>';
 
-                    echo '<li type="" class="nav-item">';
-                    echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
-                    echo '</li>';
-                }
-                else{
-                    echo '<a href="login.php">Log In</a>';
-                }
+              echo '<li type="" class="nav-item">';
+              echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
+              echo '</li>';
+            } else {
+              echo '<a href="login2.php">Log In</a>';
+            }
             ?>
           </ul>
-          
+
         </div>
       </div>
     </nav>
   </header>
-  
 
 
-<section class="container py-lg-5">
-  <!--User table-->
+
+  <section class="container pt-lg-5">
+    <!--User table-->
     <h3 class="slideInDown animated">Here are the Users daily logs</h3>
-
-    <div class="form-style-5">
-      <!-- <button type="button" data-toggle="modal" data-target="#Filter-export">Log Filter/ Export to Excel</button> -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Log Filter/ Export to Excel
-      </button>
-    </div>
-
     
-
     <!-- Log filter -->
-    <div class="modal fade bd-example-modal-lg" id="Filter-export" tabindex="-1" role="dialog" aria-labelledby="Filter/Export" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="Filter-export" tabindex="-1" role="dialog"
+      aria-labelledby="Filter/Export" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg animate" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -128,22 +121,22 @@ if (!isset($_SESSION['Admin-name'])) {
     <div class="slideInRight animated">
       <div id="userslog"></div>
     </div>
-</section>
-</main>
+  </section>
+  </main>
 
-<!-- Button trigger modal -->
+  <!-- Button trigger modal -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form method="POST" action="Export_Excel.php" enctype="multipart/form-data">
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- <form method="POST" action="Export_Excel.php" enctype="multipart/form-data">
             <div class="modal-body">
               <div class="container-fluid">
                 <div class="row">
@@ -184,21 +177,20 @@ if (!isset($_SESSION['Admin-name'])) {
                     <select class="card_sel" name="card_sel" id="card_sel">
                       <option value="0">All Users</option>
                       <?php
-                        require 'connectDB.php';
-                        $sql = "SELECT * FROM users WHERE add_card=1 ORDER BY id ASC";
-                        $result = mysqli_stmt_init($conn);
-                        if (!mysqli_stmt_prepare($result, $sql)) {
-                            echo '<p class="error">SQL Error</p>';
-                        } 
-                        else{
-                            mysqli_stmt_execute($result);
-                            $resultl = mysqli_stmt_get_result($result);
-                            while ($row = mysqli_fetch_assoc($resultl)){
-                      ?>
-                              <option value="<?php echo $row['card_uid'];?>"><?php echo $row['username']; ?></option>
+                      require 'connectDB.php';
+                      $sql = "SELECT * FROM users WHERE add_card=1 ORDER BY id ASC";
+                      $result = mysqli_stmt_init($conn);
+                      if (!mysqli_stmt_prepare($result, $sql)) {
+                        echo '<p class="error">SQL Error</p>';
+                      } else {
+                        mysqli_stmt_execute($result);
+                        $resultl = mysqli_stmt_get_result($result);
+                        while ($row = mysqli_fetch_assoc($resultl)) {
+                          ?>
+                              <option value="<?php echo $row['card_uid']; ?>"><?php echo $row['username']; ?></option>
                       <?php
-                            }
                         }
+                      }
                       ?>
                     </select>
                   </div>
@@ -207,21 +199,20 @@ if (!isset($_SESSION['Admin-name'])) {
                     <select class="dev_sel" name="dev_sel" id="dev_sel">
                       <option value="0">All Departments</option>
                       <?php
-                        require 'connectDB.php';
-                        $sql = "SELECT * FROM devices ORDER BY device_dep ASC";
-                        $result = mysqli_stmt_init($conn);
-                        if (!mysqli_stmt_prepare($result, $sql)) {
-                            echo '<p class="error">SQL Error</p>';
-                        } 
-                        else{
-                            mysqli_stmt_execute($result);
-                            $resultl = mysqli_stmt_get_result($result);
-                            while ($row = mysqli_fetch_assoc($resultl)){
-                      ?>
-                              <option value="<?php echo $row['device_uid'];?>"><?php echo $row['device_dep']; ?></option>
+                      require 'connectDB.php';
+                      $sql = "SELECT * FROM devices ORDER BY device_dep ASC";
+                      $result = mysqli_stmt_init($conn);
+                      if (!mysqli_stmt_prepare($result, $sql)) {
+                        echo '<p class="error">SQL Error</p>';
+                      } else {
+                        mysqli_stmt_execute($result);
+                        $resultl = mysqli_stmt_get_result($result);
+                        while ($row = mysqli_fetch_assoc($resultl)) {
+                          ?>
+                              <option value="<?php echo $row['device_uid']; ?>"><?php echo $row['device_dep']; ?></option>
                       <?php
-                            }
                         }
+                      }
                       ?>
                     </select>
                   </div>
@@ -236,21 +227,22 @@ if (!isset($_SESSION['Admin-name'])) {
               <button type="button" name="user_log" id="user_log" class="btn btn-success">Filter</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
-          </form>
-    
-      </div>
-      <!-- <div class="modal-footer">
+          </form> -->
+
+        </div>
+        <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
+      </div>
     </div>
   </div>
-</div>
 
 
-<section class="container py-lg-5">
+  <section class="container py-lg-5">
     <!-- Log filter -->
-    <div class="modal fade bd-example-modal-lg" id="Filter-export" tabindex="-1" role="dialog" aria-labelledby="Filter/Export" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="Filter-export" tabindex="-1" role="dialog"
+      aria-labelledby="Filter/Export" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg animate" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -264,118 +256,373 @@ if (!isset($_SESSION['Admin-name'])) {
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-4">
+        <label for="Start-Date"><b>Select from this Date:</b></label>
+        <input class="form-control" type="date" name="date_sel_start" id="date_sel_start" value="2023-07-30">
+      </div>
+      <div class="col-4">
+        <label for="End -Date"><b>To End of this Date:</b></label>
+        <input class="form-control" type="date" name="date_sel_end" id="date_sel_end" value="2023-10-31">
+      </div>
+      <div class="col-4">
+        <label for="radio-one">Time-in</label>
+        <input type="radio" id="radio-one" name="time_sel" class="time_sel" value="Time_in" checked />
+        <hr>
+        <label for="radio-two">Time-out</label>
+        <input type="radio" id="radio-two" name="time_sel" class="time_sel" value="Time_out" />
+      </div>
+      <div class="col-4">
+        <label for="Start-Time"><b>Select from this Time:</b></label>
+        <input class="form-control" type="time" name="time_sel_start" id="time_sel_start" value="06:19">
+
+      </div>
+      <div class="col-4">
+        <label for="End-Time"><b>To End of this Time:</b></label>
+        <input class="form-control" type="time" name="time_sel_end" id="time_sel_end" value="18:19">
+      </div>
+      <div class="col-4">
+      <label for="Fingerprint"><b>Filter By User:</b></label>
+        <select class="form-control card_sel" name="card_sel" id="card_sel">
+          <option value="0">All Users</option>
+          <?php
+          require 'connectDB.php';
+          $sql = "SELECT * FROM users WHERE add_card=1 ORDER BY id ASC";
+          $result = mysqli_stmt_init($conn);
+          if (!mysqli_stmt_prepare($result, $sql)) {
+            echo '<p class="error">SQL Error</p>';
+          } else {
+            mysqli_stmt_execute($result);
+            $resultl = mysqli_stmt_get_result($result);
+            while ($row = mysqli_fetch_assoc($resultl)) {
+              ?>
+              <option value="<?php echo $row['card_uid']; ?>">
+                <?php echo $row['username']; ?>
+              </option>
+              <?php
+            }
+          }
+          ?>
+        </select>
+      </div>
+      <div class="col-4">
+      <label for="Device"><b>Filter By Device department:</b></label>
+        <select class="form-control dev_sel" name="dev_sel" id="dev_sel">
+          <option value="0">All Departments</option>
+          <?php
+          require 'connectDB.php';
+          $sql = "SELECT * FROM devices ORDER BY device_dep ASC";
+          $result = mysqli_stmt_init($conn);
+          if (!mysqli_stmt_prepare($result, $sql)) {
+            echo '<p class="error">SQL Error</p>';
+          } else {
+            mysqli_stmt_execute($result);
+            $resultl = mysqli_stmt_get_result($result);
+            while ($row = mysqli_fetch_assoc($resultl)) {
+              ?>
+              <option value="<?php echo $row['device_uid']; ?>">
+                <?php echo $row['device_dep']; ?>
+              </option>
+              <?php
+            }
+          }
+          ?>
+        </select>
+      </div>
+      <div class="col-4">
+        <label for="user_log">Load</label>
+        <button type="button" name="user_log" id="user_log" class="btn btn-success form-control">Load</button>
+      </div>
+    </div>
+
+    <hr>
+
     <!-- //Log filter -->
     <div class="slideInRight animated">
+
       <div id="userslog"></div>
+
+      <table id="usersLog" class="display table-responsive-sm">
+
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>S. No</th>
+            <th>Card uid</th>
+            <th>Device Dep</th>
+            <th>Date</th>
+            <th>Time in</th>
+            <th>Time out</th>
+            <th>Item hold</th>
+          </tr>
+        </thead>
+
+        <tbody id="dtbody">
+
+        </tbody>
+      </table>
+
+
     </div>
-</section>
+  </section>
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="admin-account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="ac_update.php" method="POST" enctype="multipart/form-data">
-	      <div class="modal-body">
-	      	<label for="User-mail"><b>Admin Name:</b></label>
-	      	<input type="text" name="up_name" placeholder="Enter your Name..." value="<?php echo $_SESSION['Admin-name']; ?>" required/><br>
-	      	<label for="User-mail"><b>Admin E-mail:</b></label>
-	      	<input type="email" name="up_email" placeholder="Enter your E-mail..." value="<?php echo $_SESSION['Admin-email']; ?>" required/><br>
-	      	<label for="User-psw"><b>Password</b></label>
-	      	<input type="password" name="up_pwd" placeholder="Enter your Password..." required/><br>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="submit" name="update" class="btn btn-success">Save changes</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	      </div>
-	  </form>
-      </div>
-      <!-- <div class="modal-footer">
+  <!-- Modal -->
+  <div class="modal fade" id="admin-account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="ac_update.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+              <label for="User-mail"><b>Admin Name:</b></label>
+              <input class="form-control" type="text" name="up_name" placeholder="Enter your Name..."
+                value="<?php echo $_SESSION['Admin-name']; ?>" required /><br>
+              <label for="User-mail"><b>Admin E-mail:</b></label>
+              <input class="form-control" type="email" name="up_email" placeholder="Enter your E-mail..."
+                value="<?php echo $_SESSION['Admin-email']; ?>" required /><br>
+              <label for="User-psw"><b>Password</b></label>
+              <input class="form-control" type="password" name="up_pwd" placeholder="Enter your Password..." required /><br>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" name="update" class="btn btn-success">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
+      </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade" id="logout-account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="logout.php" method="POST" enctype="multipart/form-data">
-	      <div class="modal-body">
-		  <h1>Logout your account.</h1>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="submit" name="update" class="btn btn-success">Yes</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-	      </div>
-	  </form>
-      </div>
-      <!-- <div class="modal-footer">
+  <div class="modal fade" id="logout-account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="logout.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+              <h3>Logout your account.</h3>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" name="update" class="btn btn-success">Yes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
+      </div>
     </div>
   </div>
-</div>
 
-<script src="./js/bootstrap.bundle.min.js"></script>
-<script src="./dist/js/jquery-3.7.0.js"></script>
-<script src="./dist/js/jquery.dataTables.min.js"></script>
-<script src="./dist/js/dataTables.buttons.min.js"></script>
-<script src="./dist/js/jszip.min.js"></script>
-<script src="./dist/js/pdfmake.min.js"> </script>
-<script src="./dist/js/vfs_fonts.js"></script>
-<script src="./dist/js/buttons.html5.min.js"></script>
-<!-- <script src="./script.js"></script> -->
-<script src="./js/user_log.js"></script>
-  
-<script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./dist/js/jquery-3.7.0.js"></script>
+  <script src="./dist/js/jquery.dataTables.min.js"></script>
+  <script src="./dist/js/dataTables.buttons.min.js"></script>
+  <script src="./dist/js/jszip.min.js"></script>
+  <script src="./dist/js/pdfmake.min.js"> </script>
+  <script src="./dist/js/vfs_fonts.js"></script>
+  <script src="./dist/js/buttons.html5.min.js"></script>
+  <!-- <script src="./script.js"></script> -->
+  <script src="./js/user_log.js"></script>
 
-$(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
+  <script>
 
-</script>
-<script>
+    $(window).on("load resize ", function () {
+      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+      $('.tbl-header').css({ 'padding-right': scrollWidth });
+    }).resize();
 
-  $(document).ready(function(){
-    $.ajax({
-      url: "user_log_up.php",
-      type: 'POST',
-      data: {
-          'select_date': 1,
-      }
-      }).done(function(data) {
-        $('#userslog').html(data);
+  </script>
+  <script>
+
+    $(document).ready(function () {
+      // $.ajax({
+      //   url: "user_log_up.php",
+      //   type: 'POST',
+      //   data: {
+      //       'select_date': 1,
+      //   }
+      //   }).done(function(data) {
+      //     $('#userslog').html(data);
+      //   });
+
+      // setInterval(function(){
+      //   $.ajax({
+      //     url: "user_log_up.php",
+      //     type: 'POST',
+      //     data: {
+      //         'select_date': 0,
+      //     }
+      //     }).done(function(data) {
+      //       $('#userslog').html(data);
+      //     });
+      // },5000);
+
+
+
+
+      var table = $('#usersLog').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          'copyHtml5',
+          'excelHtml5',
+          'csvHtml5',
+          'pdfHtml5'
+        ],
+        columns: [
+          { "data": "id" },
+          { "data": "username" },
+          { "data": "serialnumber" },
+          { "data": "card_uid" },
+          { "data": "device_dep" },
+          { "data": "checkindate" },
+          { "data": "timein" },
+          { "data": "timeout" },
+          { "data": "itemhold" }
+        ],
+        columnDefs: [
+          {
+            targets: 0, // The column index where you want to render the button
+            render: function (data, type, row, meta) {
+              return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
+
+            }
+          }
+        ]
       });
 
-    setInterval(function(){
+      var date_sel_start = $('#date_sel_start').val();
+      console.log('date_sel_start: ' + date_sel_start);
+      var date_sel_end = $('#date_sel_end').val();
+      console.log('date_sel_end '+date_sel_end)
+      var time_sel = $(".time_sel:checked").val();
+      console.log('time_sel '+time_sel)
+      var time_sel_start = $('#time_sel_start').val();
+      console.log('time_sel_start '+time_sel_start)
+      var time_sel_end = $('#time_sel_end').val();
+      console.log('time_sel_end ' + time_sel_end)
+      var card_sel = $('#card_sel option:selected').val();
+      console.log('card_sel '+card_sel)
+      var dev_uid = $('#dev_sel option:selected').val();
+      console.log('dev_sel '+dev_uid)
+    
+
+      // Make an AJAX request to fetch data
+      //http://localhost/rfidattendance/user_log_up2.php?select_date=0&log_date=2023-01-01&date_sel_start=2023-01-01&date_sel_end=2023-12-31&time_sel=&card_sel=0&dev_uid=0
+      // http://localhost/rfidattendance/user_log_up2.php?
+      // select_date=0&
+      // log_date=2023-01-01&
+      // date_sel_start=2023-01-01&
+      // date_sel_end=2023-12-31&
+      // time_sel=&
+      // card_sel=0&
+      // dev_uid=0
       $.ajax({
-        url: "user_log_up.php",
-        type: 'POST',
+        url: 'user_log_up2.php', // Replace with your data source URL
+        type: 'POST', // You can use 'POST' if needed
+        dataType: 'json',
         data: {
             'select_date': 0,
-        }
-        }).done(function(data) {
-          $('#userslog').html(data);
-        });
-    },5000);
-  });
+            'log_date': 0,
+            'date_sel_start': date_sel_start,
+            'date_sel_end': date_sel_end,
+            'time_sel': time_sel,
+            'time_sel_start': time_sel_start,
+            'time_sel_end': time_sel_end,
+            'dev_uid': dev_uid,
+            'card_sel': card_sel,
+            
+        },
+        success: function (data) {
+          // Clear the existing data in the DataTable
+          table.clear().draw();
+          console.log(data);
 
-</script>
+          // Insert the retrieved data into the DataTable
+          table.rows.add(data).draw();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log('AJAX Error: ' + errorThrown);
+        }
+      });
+
+
+
+      // setInterval(function () {
+      //   $.ajax({
+      //     url: 'user_log_up2.php', // Replace with your data source URL
+      //     type: 'GET', // You can use 'POST' if needed
+      //     data: {
+      //       'log_date': 1,
+      //       'date_sel_start': date_sel_start,
+      //       'date_sel_end': date_sel_end,
+      //       'time_sel_start': time_sel_start,
+      //       'time_sel_end': time_sel_end,
+      //       'dev_uid': dev_uid,
+      //       'time_sel': time_sel,
+      //       'card_sel': 0,
+      //       'select_date': 0,
+      //     },
+      //     success: function (data) {
+      //       // Clear the existing data in the DataTable
+      //       table.clear().draw();
+
+      //       // Insert the retrieved data into the DataTable
+      //       table.rows.add(data).draw();
+      //     },
+      //     error: function (jqXHR, textStatus, errorThrown) {
+      //       console.log('AJAX Error: ' + errorThrown);
+      //     }
+      //   });
+      // }, 5000)
+
+      // setInterval(function(){
+      // 	$.ajax({
+      // 		url: 'user_log_up2.php?select_date=0&log_date=2023-01-01&date_sel_start=2023-01-01&date_sel_end=2023-12-31&time_sel=&card_sel=0&dev_uid=0', // Replace with your data source URL
+      // 		type: 'GET', // You can use 'POST' if needed
+      // 		dataType: 'json',
+      // 		success: function(data) {
+      // 			// Clear the existing data in the DataTable
+      // 			table.clear().draw();
+
+      // 			// Insert the retrieved data into the DataTable
+      // 			table.rows.add(data).draw();
+      // 		},
+      // 		error: function(jqXHR, textStatus, errorThrown) {
+      // 			console.log('AJAX Error: ' + errorThrown);
+      // 		}
+      // 	});
+      // },5000);
+
+    });
+
+    // $('#example').DataTable({
+    // 		dom: 'Bfrtip',
+    // 		buttons: [
+    // 			'copyHtml5',
+    // 			'excelHtml5',
+    // 			'csvHtml5',
+    // 			'pdfHtml5'
+    // 		]
+    // 	});
+
+  </script>
 
 </body>
+
 </html>

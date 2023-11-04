@@ -2,7 +2,7 @@
 session_start();
 ?>
 <div class="table-responsive" style="max-height: 500px;"> 
-  <table class="table">
+  <table class="table" id="example">
     <thead class="table-primary">
       <tr>
         <th>ID</th>
@@ -20,7 +20,7 @@ session_start();
       <?php
 
         //Connect to database
-        require'connectDB.php';
+        require 'connectDB.php';
         $searchQuery = " ";
         $Start_date = " ";
         $End_date = " ";
@@ -97,6 +97,7 @@ session_start();
         $result = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($result, $sql)) {
             echo '<p class="error">SQL Error</p>';
+      
         }
         else{
             mysqli_stmt_execute($result);

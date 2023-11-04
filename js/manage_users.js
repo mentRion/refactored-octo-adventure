@@ -150,6 +150,9 @@
       }
     });
   });
+
+
+
   // select user
   $(document).on('click', '.select_btn', function(){
     var el = this;
@@ -232,12 +235,7 @@
     });
   });
 
-  $('.table').DataTable( {
-    dom: 'Bfrtip',
-    buttons: [
-        'copyHtml5',
-        'excelHtml5',
-        'csvHtml5',
-        'pdfHtml5'
-    ]
-} );
+
+
+
+
