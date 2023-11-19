@@ -57,7 +57,7 @@
 ?>
 
 <div class="topnav" id="myTopnav">
-	<a href="index2.php">Users</a>
+	<a href="index.php">Users</a>
     <a href="ManageUsers.php">Manage Users</a>
     <a href="UsersLog.php">Users Log</a>
     <a href="devices.php">Devices</a>

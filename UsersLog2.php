@@ -55,7 +55,7 @@ if (!isset($_SESSION['Admin-name'])) {
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index2.php">Users</a>
+              <a class="nav-link active" aria-current="page" href="index.php">Users</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
@@ -346,15 +346,17 @@ if (!isset($_SESSION['Admin-name'])) {
 
         <thead>
           <tr>
-            <th>Id</th>
+            <th>+</th>
+            <!-- <th>Id</th> -->
             <th>Name</th>
-            <th>S. No</th>
-            <th>Card uid</th>
-            <th>Device Dep</th>
-            <th>Date</th>
-            <th>Time in</th>
-            <th>Time out</th>
-            <th>Item hold</th>
+            <!-- <th>S. No</th> -->
+            <!-- <th>Card uid</th> -->
+            <!-- <th>Device Dep</th> -->
+            <!-- <th>Date</th> -->
+            <!-- <th>Time in</th> -->
+            <!-- <th>Time out</th> -->
+            <!-- <th>Item hold</th> -->
+            <th>Count</th>
           </tr>
         </thead>
 
@@ -362,7 +364,6 @@ if (!isset($_SESSION['Admin-name'])) {
 
         </tbody>
       </table>
-
 
     </div>
   </section>
@@ -451,6 +452,22 @@ if (!isset($_SESSION['Admin-name'])) {
   <script>
 
     $(document).ready(function () {
+
+      var date_sel_start = $('#date_sel_start').val();
+      console.log('date_sel_start: ' + date_sel_start);
+      var date_sel_end = $('#date_sel_end').val();
+      console.log('date_sel_end '+date_sel_end)
+      var time_sel = $(".time_sel:checked").val();
+      console.log('time_sel '+time_sel)
+      var time_sel_start = $('#time_sel_start').val();
+      console.log('time_sel_start '+time_sel_start)
+      var time_sel_end = $('#time_sel_end').val();
+      console.log('time_sel_end ' + time_sel_end)
+      var card_sel = $('#card_sel option:selected').val();
+      console.log('card_sel '+card_sel)
+      var dev_uid = $('#dev_sel option:selected').val();
+      console.log('dev_sel '+dev_uid)
+
       // $.ajax({
       //   url: "user_log_up.php",
       //   type: 'POST',
@@ -472,10 +489,7 @@ if (!isset($_SESSION['Admin-name'])) {
       //       $('#userslog').html(data);
       //     });
       // },5000);
-
-
-
-
+      
       var table = $('#usersLog').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -485,43 +499,175 @@ if (!isset($_SESSION['Admin-name'])) {
           'pdfHtml5'
         ],
         columns: [
-          { "data": "id" },
+          { "data": "" },
+          // { "data": "id" },
           { "data": "username" },
-          { "data": "serialnumber" },
-          { "data": "card_uid" },
-          { "data": "device_dep" },
-          { "data": "checkindate" },
-          { "data": "timein" },
-          { "data": "timeout" },
-          { "data": "itemhold" }
+          // { "data": "serialnumber" },
+          // { "data": "card_uid" },
+          // { "data": "device_dep" },
+          // { "data": "checkindate" },
+          // { "data": "timein" },
+          // { "data": "timeout" },
+          // { "data": "itemhold" },
+          { "data": "count"}
         ],
         columnDefs: [
           {
             targets: 0, // The column index where you want to render the button
             render: function (data, type, row, meta) {
-              return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
+              // return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
+              return '<button type="button" class="btn btn-primary">' + '+' + '</button>';
+            }
+          },
 
+          {
+            targets: 1, // The column index where you want to render the button
+            render: function (data, type, row, meta) {
+              // return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
+              return '<b>' + data + '</b>';
+            }
+          },
+
+          {
+            targets: 2, // The column index where you want to render the button
+            render: function (data, type, row, meta) {
+              // return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
+              return '<b>' + data + '</b>';
             }
           }
-        ]
+
+        ],
+        order: [[1, 'asc']]
       });
 
-      var date_sel_start = $('#date_sel_start').val();
-      console.log('date_sel_start: ' + date_sel_start);
-      var date_sel_end = $('#date_sel_end').val();
-      console.log('date_sel_end '+date_sel_end)
-      var time_sel = $(".time_sel:checked").val();
-      console.log('time_sel '+time_sel)
-      var time_sel_start = $('#time_sel_start').val();
-      console.log('time_sel_start '+time_sel_start)
-      var time_sel_end = $('#time_sel_end').val();
-      console.log('time_sel_end ' + time_sel_end)
-      var card_sel = $('#card_sel option:selected').val();
-      console.log('card_sel '+card_sel)
-      var dev_uid = $('#dev_sel option:selected').val();
-      console.log('dev_sel '+dev_uid)
-    
+      // Add a click event listener to the table body
+    $('#usersLog tbody').on('click', 'tr', function () {
 
+        var currentRow = table.row(this);
+        var isCollapsed = currentRow.child.isShown();
+
+        // Collapse or expand rows with the same username
+        table.rows().eq(0).each(function (index) {
+            var row = table.row(index);
+            if (row.data().username === currentRow.data().username) {
+              let data = format(row.data());
+                if (isCollapsed) {
+                    console.log('hide');
+                    if(data.length > 0){
+                      row.child(data).hide();
+                    }
+                    else{
+                      row.child([{}]).hide();
+                    }
+                } else {
+                  if(data.length > 0){
+                    row.child(data).show();
+                  }
+                  else{
+                    row.child([{}]).show();
+                  }
+                    console.log('show')
+                    
+                }
+            }
+        });
+
+        // Toggle the collapse/expand icon in the group row
+        //$(this).toggleClass('collapsed');
+
+        // Redraw the table
+        table.draw();
+    });
+
+    var getdata = [];
+
+    function passdata(from){
+      let datafrom = from
+      getdata = datafrom
+    }
+
+    function format(data) {
+      console.log(data.username);
+        // This function returns the content for the child row
+        // You can customize this based on your data structure
+          let ret = $.ajax({
+          url: 'user_item.php', // Replace with your data source URL
+          type: 'GET', // You can use 'POST' if needed
+          dataType: 'json',
+          data: {
+              'username': data.username,
+              'log_date': 1,
+              'date_sel_start': $('#date_sel_start').val(),
+              'date_sel_end': $('#date_sel_end').val(),
+              'time_sel_start': time_sel_start,
+              'time_sel_end': time_sel_end,
+              'dev_uid': dev_uid,
+              'time_sel': time_sel,
+              'card_sel': 0,
+              'select_date': 0,
+
+          },
+          success: function (data) {
+            passdata(data)
+            console.log(getdata)          
+            // Insert the retrieved data into the DataTable
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log('AJAX Error: ' + errorThrown);
+          }
+        });
+
+        let _lineitem0 = 
+        '<table class="table border">'+
+        '<thead>'+
+          '<tr>'+
+            '<th scope="col">+</th>'+
+            '<th scope="col">USER</th>'+
+            '<th scope="col">ID</th>'+
+            '<th scope="col">TOOL</th>'+
+            // '<th scope="col">serialnumber</th>'+
+            // '<th scope="col">username</th>'+
+            
+            '<th scope="col">UID</th>'+
+            // '<th scope="col">device_dep</th>'+
+            '<th scope="col">DATE</th>'+
+            '<th scope="col">TIME IN</th>'+
+            '<th scope="col">TIME OUT</th>'+
+            
+          '</tr>'+
+        '</thead>'+
+        '<tbody>';
+          
+      
+
+            getdata.forEach(
+          (p) => { _lineitem0 += '<tr>'+
+                    '<th scope="row">+</th>'+
+                    '<td><b>'+p.username+'</b></td>'+
+                    '<td>'+p.id+'</td>'+
+                    '<td>'+p.itemhold+'</td>'+
+                    // '<td>'+p.serialnumber+'</td>'+
+                    '<td>'+p.card_uid+'</td>'+
+                    '<td>'+p.checkindate+'</td>'+
+                    // '<td>'+p.device_dep+'</td>'+
+                    // '<td>'+p.checkindate+'</td>'+
+                    '<td><b>'+p.timein+'</b></td>'+
+                    '<td><b>'+p.timeout+'</b></td>'+
+                  '</tr>'
+            });
+        _lineitem0 +=
+          '</tbody>' +
+          '</table>'
+       
+        let _data = getdata;
+        console.log(_data[0]);
+        console.log("--" + getdata);
+        console.log("--" + ret);
+
+        // return '<div>' + data.username + ' Details</div>';
+        return _lineitem0;
+    }
+    
       // Make an AJAX request to fetch data
       //http://localhost/rfidattendance/user_log_up2.php?select_date=0&log_date=2023-01-01&date_sel_start=2023-01-01&date_sel_end=2023-12-31&time_sel=&card_sel=0&dev_uid=0
       // http://localhost/rfidattendance/user_log_up2.php?
@@ -534,20 +680,21 @@ if (!isset($_SESSION['Admin-name'])) {
       // dev_uid=0
       $.ajax({
         url: 'user_log_up2.php', // Replace with your data source URL
-        type: 'POST', // You can use 'POST' if needed
+        type: 'GET', // You can use 'POST' if needed
         dataType: 'json',
+
         data: {
-            'select_date': 0,
-            'log_date': 0,
-            'date_sel_start': date_sel_start,
-            'date_sel_end': date_sel_end,
-            'time_sel': time_sel,
-            'time_sel_start': time_sel_start,
-            'time_sel_end': time_sel_end,
-            'dev_uid': dev_uid,
-            'card_sel': card_sel,
-            
-        },
+              'log_date': 1,
+              'date_sel_start': $('#date_sel_start').val(),
+              'date_sel_end': $('#date_sel_end').val(),
+              'time_sel_start': time_sel_start,
+              'time_sel_end': time_sel_end,
+              'dev_uid': dev_uid,
+              'time_sel': time_sel,
+              'card_sel': 0,
+              'select_date': 0,
+
+          },
         success: function (data) {
           // Clear the existing data in the DataTable
           table.clear().draw();
@@ -560,8 +707,6 @@ if (!isset($_SESSION['Admin-name'])) {
           console.log('AJAX Error: ' + errorThrown);
         }
       });
-
-
 
       // setInterval(function () {
       //   $.ajax({
@@ -610,6 +755,9 @@ if (!isset($_SESSION['Admin-name'])) {
       // },5000);
 
     });
+
+
+
 
     // $('#example').DataTable({
     // 		dom: 'Bfrtip',
