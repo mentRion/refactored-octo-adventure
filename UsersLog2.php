@@ -256,7 +256,7 @@ if (!isset($_SESSION['Admin-name'])) {
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-4">
         <label for="Start-Date"><b>Select from this Date:</b></label>
         <input class="form-control" type="date" name="date_sel_start" id="date_sel_start" value="2023-07-30">
@@ -333,7 +333,7 @@ if (!isset($_SESSION['Admin-name'])) {
         <label for="user_log">Load</label>
         <button type="button" name="user_log" id="user_log" class="btn btn-success form-control">Load</button>
       </div>
-    </div>
+    </div> -->
 
     <hr>
 
@@ -551,23 +551,13 @@ if (!isset($_SESSION['Admin-name'])) {
             var row = table.row(index);
             if (row.data().username === currentRow.data().username) {
               let data = format(row.data());
+              console.log('format data: ' + data);
                 if (isCollapsed) {
+                    row.child(data).hide();
                     console.log('hide');
-                    if(data.length > 0){
-                      row.child(data).hide();
-                    }
-                    else{
-                      row.child([{}]).hide();
-                    }
                 } else {
-                  if(data.length > 0){
                     row.child(data).show();
-                  }
-                  else{
-                    row.child([{}]).show();
-                  }
-                    console.log('show')
-                    
+                    console.log('show');
                 }
             }
         });
@@ -587,6 +577,7 @@ if (!isset($_SESSION['Admin-name'])) {
     }
 
     function format(data) {
+
       console.log(data.username);
         // This function returns the content for the child row
         // You can customize this based on your data structure
@@ -613,6 +604,7 @@ if (!isset($_SESSION['Admin-name'])) {
             // Insert the retrieved data into the DataTable
           },
           error: function (jqXHR, textStatus, errorThrown) {
+            passdata([])
             console.log('AJAX Error: ' + errorThrown);
           }
         });
@@ -660,7 +652,7 @@ if (!isset($_SESSION['Admin-name'])) {
           '</table>'
        
         let _data = getdata;
-        console.log(_data[0]);
+        console.log('data ' + _data);
         console.log("--" + getdata);
         console.log("--" + ret);
 
