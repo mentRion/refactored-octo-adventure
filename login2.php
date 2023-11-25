@@ -193,6 +193,7 @@ if (isset($_SESSION['Admin-name'])) {
           <p class="message">Forgot your Password? <a href="#">Reset your password</a></p>
         </form>
         </div>
+        
         <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
