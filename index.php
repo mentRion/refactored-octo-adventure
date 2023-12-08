@@ -31,18 +31,25 @@ if (!isset($_SESSION['Admin-name'])) {
         font-size: 3.5rem;
       }
     }
+    .text-white{
+        color: white;
+      }
+      .text-black{
+        color:black;
+      }
+     
   </style>
 
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 </head>
 
-<body>
+<body style='background-color:#083248'>
 
-  <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
+  <header  class='text-white'>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
       <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.php">Avionics</a>
+      <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -56,52 +63,69 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
+              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
-            <?php  
-                if (isset($_SESSION['Admin-name'])) {
-
-                    echo '<li type="" class="nav-item">';
-                    echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
-                    echo '</li>';
-
-                    echo '<li type="" class="nav-item">';
-                    echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
-                    echo '</li>';
-                }
-                else{
-                    echo '<a href="login2.php">Log In</a>';
-                }
-            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
+            </li>
           </ul>
           
         </div>
+        <div class="d-flex">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+            <?php
+            if (isset($_SESSION['Admin-name'])) {
+              // echo '<li class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
+              // echo '</li>';
+              // echo '<li class="nav-item">';
+              // echo '<a class="nav-link" href="logout.php">Log Out</a>';
+              // echo '</li>';
+            
+              // echo '<li type="" class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              // echo '</li>';
+
+              echo '<li type="" class="nav-item">';
+              echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
+              echo '</li>';
+            } else {
+              echo '<a href="login2.php">Log In</a>';
+            }
+            ?>
+            </li>
+          <ul>
+        </div>
+          </div>
       </div>
     </nav>
   </header>
   
-  <main>
+  <main  class='text-white'>
     <div class="container marketing">
 
-      <hr class="featurette-divider">
+      <!-- <hr class="featurette-divider"> -->
 
-      <div class="row featurette">
+      <div class="row featurette" style='margin-top: 100px;'>
         <div class="col">
-          <table id="example" class="display" style="width:100%">
-            <thead>
+          <table id="example" class="display" style="width:100%" style='background: #dba858'>
+            <thead style='background: #E89C31'>
                 <tr>
                     <th>User</th>
-                    <th>Serial No.</th>
+                    <th>Mobile No.</th>
                     <th>Gender</th>
                     <th>Card UID</th>
                     <th>User Date</th>
                     <th>Device Dept.</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style='background: #dba858'>
             <?php
                 //Connect to database
                 require'connectDB.php';
@@ -118,11 +142,11 @@ if (!isset($_SESSION['Admin-name'])) {
                         while ($row = mysqli_fetch_assoc($resultl)){
                 ?>
                             <TR>
-                            <TD><?php echo $row['id']; echo" | "; echo $row['username'];?></TD>
+                            <TD><b><?php echo $row['id']; echo" | "; echo $row['username'];?></b></TD>
                             <TD><?php echo $row['serialnumber'];?></TD>
                             <TD><?php echo $row['gender'];?></TD>
                             <TD><?php echo $row['card_uid'];?></TD>
-                            <TD><?php echo $row['user_date'];?></TD>
+                            <TD ><?php echo date('d/m/Y',strtotime($row['user_date']));?></TD>
                             <TD><?php echo $row['device_dep'];?></TD>
                             </TR>
                 <?php
@@ -131,7 +155,7 @@ if (!isset($_SESSION['Admin-name'])) {
                 }
                 ?>
             </tbody>
-            <tfoot>
+            <!-- <tfoot>
                 <tr>
                     <th>User</th>
                     <th>Serial No.</th>
@@ -140,20 +164,21 @@ if (!isset($_SESSION['Admin-name'])) {
                     <th>User Date</th>
                     <th>Device Dept.</th>
                 </tr>
-            </tfoot>
+            </tfoot> -->
         </table>
         </div>
       </div>
 
 
-      <hr class="featurette-divider">
+      <hr class="featurette-divider" style='margin-top: 150px;'>
 
     </div>
     
     <!-- FOOTER -->
     <footer class="container">
       <p class="float-end"><a href="#">Back to top</a></p>
-      <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      <img src="./AIS_YELLOW-removebg-preview.png" alt="" width='80px' height='50px'>         
+      <p>Avionics Inventory System </p>
     </footer>
   </main>
 
@@ -201,7 +226,7 @@ if (!isset($_SESSION['Admin-name'])) {
       <div class="modal-body">
       <form action="logout.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-body">
-		  <h3>Logout your account.</h3>
+		  <h3 class='text-black' style='color:#000'>Logout your account.</h3>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="submit" name="update" class="btn btn-success">Yes</button>
@@ -216,6 +241,8 @@ if (!isset($_SESSION['Admin-name'])) {
     </div>
   </div>
 </div>
+
+
 
   
   <script src="./js/bootstrap.bundle.min.js"></script>

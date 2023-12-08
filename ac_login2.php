@@ -37,7 +37,7 @@ if (isset($_POST['login'])) {
 	                session_start();
 					$_SESSION['Admin-name'] = $row['admin_name'];
 					$_SESSION['Admin-email'] = $row['admin_email'];
-					header("location: index.php?login=success");
+					header("location: dashboard.php?login=success");
 					exit();
 				}
 			}

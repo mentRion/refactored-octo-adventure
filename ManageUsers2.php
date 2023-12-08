@@ -32,18 +32,21 @@ if (!isset($_SESSION['Admin-name'])) {
 				font-size: 3.5rem;
 			}
 		}
+		.text-yellow{
+        color: white;
+      }
 	</style>
 
 	<!-- Custom styles for this template -->
 	<link href="carousel.css" rel="stylesheet">
 </head>
 
-<body>
+<body style='background-color:#083248'>
 
-	<header>
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="dashboard.php">Avionics</a>
+	<header  class='text-yellow'>
+	    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
 					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -57,34 +60,50 @@ if (!isset($_SESSION['Admin-name'])) {
 							<a class="nav-link" href="ManageUsers2.php">Manage Users</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
+							<a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
+							<a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
 						</li>
-						<?php
-						if (isset($_SESSION['Admin-name'])) {
-
-							echo '<li type="" class="nav-item">';
-							echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
-							echo '</li>';
-
-							echo '<li type="" class="nav-item">';
-							echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
-							echo '</li>';
-						} else {
-							echo '<a href="login2.php">Log In</a>';
-						}
-						?>
+						
 					</ul>
 				</div>
+				<div class="d-flex">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+            <?php
+            if (isset($_SESSION['Admin-name'])) {
+              // echo '<li class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
+              // echo '</li>';
+              // echo '<li class="nav-item">';
+              // echo '<a class="nav-link" href="logout.php">Log Out</a>';
+              // echo '</li>';
+            
+              // echo '<li type="" class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              // echo '</li>';
+
+              echo '<li type="" class="nav-item">';
+              echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
+              echo '</li>';
+            } else {
+              echo '<a href="login2.php">Log In</a>';
+            }
+            ?>
+            </li>
+          <ul>
+        </div>
+          </div>
 			</div>
 		</nav>
 	</header>
 
-	<main>
-		<div class="container marketing">
-			<hr class="featurette-divider">
+	<main  class='text-yellow'>
+		<div class="container marketing" style="margin-top:100px">
+			<!-- <hr class="featurette-divider"> -->
 
 			<form enctype="multipart/form-data">
 				<div class="alert_user"></div>
@@ -112,19 +131,16 @@ if (!isset($_SESSION['Admin-name'])) {
 				</div> -->
 
 				<div class="row g-3  align-items-center">
-					<div class="col-12">
-						<legend><span class="number">2</span> Additional Info</legend>
-					</div>
-
+		
 
 				</div>
 
 			</form>
 
-			<hr>
+		
 
 			<div class="row featurette">
-				<div class="col-8">
+				<div class="col-9">
 					<div class="slideInRight animated">
 						<!-- <div id="manage_users"></div> -->
 
@@ -133,20 +149,21 @@ if (!isset($_SESSION['Admin-name'])) {
 
 					<div id="result"> </div> -->
 
-						<table id="example" class="table-responsive-sm display">
-
-							<thead>
+						<table id="example" class="table-responsive-sm display" style='background: #dba858'>
+						
+							<thead style='background: #e89c31'>
 								<tr>
 									<th>Card UID</th>
 									<th>Name</th>
 									<th>Gender</th>
-									<th>S.No</th>
+									<th>Mobile Number</th>
+									<th>Email</th>
 									<th>Date</th>
 									<th>Department</th>
 								</tr>
 							</thead>
 
-							<tbody id="dtbody">
+							<tbody id="dtbody table-responsive-sm">
 
 							</tbody>
 						</table>
@@ -154,10 +171,10 @@ if (!isset($_SESSION['Admin-name'])) {
 					</div>
 				</div>
 
-				<div class="col-4">
+				<div class="col-3">
 
 						<div class="col-12 mb-3">
-							<legend><span class="number" disabled>1</span> User Info</legend>
+							<legend><span class="number" disabled> User Information</legend>
 						</div>
 						<div class="col-12 mb-3">
 							<label for="">User ID</label>
@@ -169,9 +186,9 @@ if (!isset($_SESSION['Admin-name'])) {
 								placeholder="User Name...">
 						</div>
 						<div class="col-12 mb-3">
-							<label for="">Serial Number</label>
+							<label for="">Mobile Number</label>
 							<input type="text" class="form-control" type="text" name="number" id="number"
-								placeholder="Serial Number...">
+								placeholder="Mobile Number...">
 						</div>
 						<div class="col-12 mb-3">
 							<label for="">User Email</label>
@@ -224,28 +241,29 @@ if (!isset($_SESSION['Admin-name'])) {
 
 					</div>
 						<div class="col-12 mb-3">
-							<button type="button" name="user_add" class="user_add btn btn-primary form-control">Add User</button>
+							<button type="button" name="user_add" class="user_add btn btn-primary form-control btn btn-success">Add User</button>
 						</div>
 
 						<div class="col-12 mb-3">
-							<button type="button" name="user_upd" class="user_upd btn btn-primary form-control">Update User</button>
+							<button type="button" name="user_upd" class="user_upd btn btn-primary form-control btn btn-primary">Update User</button>
 						</div>
 
 						<div class="col-12 mb-3">
-							<button type="button" name="user_rmo" class="user_rmo btn btn-primary form-control">Remove User</button>
+							<button type="button" name="user_rmo" class="user_rmo btn btn-primary form-control btn btn-danger">Remove User</button>
 						</div>
 					</div>
 				</div>
 
-			<hr class="featurette-divider">
+				<hr class="featurette-divider" style='margin-top: 150px;'>
 
 		</div>
 
 		<!-- FOOTER -->
 		<footer class="container">
-			<p class="float-end"><a href="#">Back to top</a></p>
-			<p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-		</footer>
+      <p class="float-end"><a href="#">Back to top</a></p>
+	  <img src="./AIS_YELLOW-removebg-preview.png" alt="" width='80px' height='50px'>
+      <p>Avionics Inventory System </p>
+    </footer>
 	</main>
 
 	<!-- Modal -->
@@ -403,6 +421,7 @@ if (!isset($_SESSION['Admin-name'])) {
 					{ "data": "username" },
 					{ "data": "gender" },
 					{ "data": "serialnumber" },
+					{ "data": "email" },
 					{ "data": "user_date" },
 					{ "data": "device_dep" }
 				],
@@ -410,7 +429,23 @@ if (!isset($_SESSION['Admin-name'])) {
 					{
 						targets: 0, // The column index where you want to render the button
 						render: function (data, type, row, meta) {
-							return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
+							return '<form><button type="button" class="btn select_btn" id="' + data + '" title="select this UID" style="background-color:#e89c31">' + data + '</button></form>';
+
+						}
+					},
+					{
+						targets: 1, // The column index where you want to render the button
+						render: function (data, type, row, meta) {
+							return '<b>' + data + '</b>';
+
+						}
+					},
+					{
+						targets: 5, // The column index where you want to render the button
+						render: function (data, type, row, meta) {
+							let str =  data.replace('-','/');
+							str =  str.replace('-','/');
+							return str;
 
 						}
 					}
@@ -455,6 +490,8 @@ if (!isset($_SESSION['Admin-name'])) {
 		});
 
 	</script>
+
+	
 
 </body>
 

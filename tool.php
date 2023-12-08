@@ -16,7 +16,6 @@ if (!isset($_SESSION['Admin-name'])) {
   <!-- <link rel="stylesheet" type="text/css" href="css/devices.css"/> -->
   <link rel="stylesheet" href="./dist/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="./dist/css/buttons.dataTables.min.css">
-  <script src="js/dev_config.js"></script>
 
   <!-- Bootstrap core CSS -->
 
@@ -34,38 +33,18 @@ if (!isset($_SESSION['Admin-name'])) {
         font-size: 3.5rem;
       }
     }
-    .text-yellow{
-        color: white;
-      }
   </style>
-
-</script>
-
-	<script>
-		$(document).ready(function(){
-		    $.ajax({
-		      	url: "dev_up.php",
-		      	type: 'POST',
-		      	data: {
-		        'dev_up': 1,
-		  		}
-	      	}).done(function(data) {
-	  			$('#devices').html(data);
-    		});
-		});
-	</script>
-</head>
 
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 </head>
 
-<body style='background-color:#083248' class='text-yellow'>
+<body>
 
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
       <div class="container-fluid">
-      <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
+        <a class="navbar-brand" href="dashboard.php">Avionics</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -79,34 +58,17 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
+              <a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
-            </li>
-          </ul>
-
-        </div>
-        <div class="d-flex">
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
             <?php
             if (isset($_SESSION['Admin-name'])) {
-              // echo '<li class="nav-item">';
-              // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
-              // echo '</li>';
-              // echo '<li class="nav-item">';
-              // echo '<a class="nav-link" href="logout.php">Log Out</a>';
-              // echo '</li>';
-            
-              // echo '<li type="" class="nav-item">';
-              // echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
-              // echo '</li>';
+
+              echo '<li type="" class="nav-item">';
+              echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              echo '</li>';
 
               echo '<li type="" class="nav-item">';
               echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
@@ -115,64 +77,54 @@ if (!isset($_SESSION['Admin-name'])) {
               echo '<a href="login2.php">Log In</a>';
             }
             ?>
-            </li>
-          <ul>
+          </ul>
+
         </div>
-          </div>
       </div>
     </nav>
   </header>
+
   <main>
-
-    <div class="container marketing mt-5">
-      <!-- <hr class="featurette-divider"> -->
-      
-
-        <div class="row my-3">
-        <div class="col-lg-12">
-          <div class="panel">
-              <div class="panel-heading" style="font-size: 19px;">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#new-device" style="font-size: 18px; float: right; margin-top: -6px;">New Device</button>
-              </div>
-              <!-- <div class="panel-body">
-                  <div id="devices"></div>
-              </div> -->
-            </div>
-        </div>
-      </div>
-
-
-
+    <div class="container marketing">
+    <div class="row">
+			<div class="col-lg-12 mt-4">
+				<div class="panel">
+			      <div class="panel-heading" style="font-size: 19px;">Tools:
+			      	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#new-device" style="font-size: 18px; float: right; margin-top: -6px;">New Tool</button>
+			      </div>
+			      <div class="panel-body">
+			      		<!-- <div id="devices"></div> -->
+			      </div>
+			    </div>
+			</div>
+		</div>
+      <hr class="featurette-divider">
       <div class="panel-heading">
         <div class="row featurette">
           <div class="col">
           <!-- <div id="devices">
           </div> -->
 
-            <table id="devices2" class="table-responsive-sm display" style='background: #dba858'>
-              <thead style='background: #e89c31'>
+            <table id="devices2" class="table-responsive-sm display">
+              <thead>
               <tr>
-                <th>Name</th>
-                <th>Department</th>
-                <th>UID</th>
-                <th>Date</th>
-                <th>Mode</th>
-                <th>Config</th>
+                <th>Tool Name</th>
+                <th>Tool Description</th>
+                <th>Quantity</th>
+                <th>Action</th>
               </tr>
               </thead>
             </table>
           </div>
         </div>
 
-        <hr class="featurette-divider" style='margin-top:150px;'>
-
+        <hr class="featurette-divider">
       </div>
 
       <!-- FOOTER -->
       <footer class="container">
         <p class="float-end"><a href="#">Back to top</a></p>
-        <img src="./AIS_YELLOW-removebg-preview.png" alt="" width='80px' height='50px'>
-        <p>Avionics Inventory System </p>
+        <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
   </main>
 
@@ -187,8 +139,8 @@ if (!isset($_SESSION['Admin-name'])) {
         <div class="modal-body">
           <form action="ac_update.php" method="POST" enctype="multipart/form-data">
             <div class="modal-body">
-              <label for="User-mail"><b>Admin Name:</b></label>
-              <input class="form-control" type="text" name="up_name" placeholder="Enter your Name..."
+              
+            
                 value="<?php echo $_SESSION['Admin-name']; ?>" required /><br>
               <label for="User-mail"><b>Admin E-mail:</b></label>
               <input class="form-control" type="email" name="up_email" placeholder="Enter your E-mail..."
@@ -240,22 +192,23 @@ if (!isset($_SESSION['Admin-name'])) {
 		  <div class="modal-dialog modal-dialog-centered" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h3 class="modal-title" id="exampleModalLongTitle">Add new device:</h3>
-		        
-
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
+		        <h3 class="modal-title" id="exampleModalLongTitle">Add Tool:</h3>
+		        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
 		      </div>
 		      <form action="" method="POST" enctype="multipart/form-data">
 			      <div class="modal-body">
-			      	<label for="User-mail"><b>Device Name:</b></label>
-			      	<input class='form-control' type="text" name="dev_name" id="dev_name" placeholder="Device Name..." required/><br>
-			      	<label for="User-mail"><b>Device Department:</b></label>
-			      	<input class='form-control' type="text" name="dev_dep" id="dev_dep" placeholder="Device Department..." required/><br>
+              <label for="tool_name"><b>Tool Name:</b></label>
+			      	<input class="form-control" type="text" name="tool_name" id="tool_name" placeholder="Tool Name..." required/><br>
+			      	<label for="tool_descrip"><b>Tool Description:</b></label>
+			      	<input class="form-control" type="text" name="tool_descrip" id="tool_descrip" placeholder="Tool Description..." required/><br>
+              <label for="quantity"><b>Quantity:</b></label>
+			      	<input class="form-control" type="number" name="quantity" id="quantity" placeholder="" required/><br>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" name="dev_add" id="dev_add" class="btn btn-success">Create new Device</button>
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" name="dev_add" id="dev_add" class="btn btn-success">Create New Tool</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 			      </div>
 			  </form>
 		    </div>
@@ -275,7 +228,8 @@ if (!isset($_SESSION['Admin-name'])) {
 
   <script type="text/javascript" src="./js/bootbox.min.js"></script>
 
-  <script src="./js/dev_config.js"></script>
+  <script src="./js/tool_config.js"></script>
+  
   <script>
     $(window).on("load resize ", function () {
       var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
@@ -283,8 +237,8 @@ if (!isset($_SESSION['Admin-name'])) {
     }).resize();
   </script>
   <script>
-    $(document).ready(function () {
 
+    $(document).ready(function () {
 
       // $.ajax({
       //   	url: "dev_up.php",
@@ -306,72 +260,29 @@ if (!isset($_SESSION['Admin-name'])) {
         ],
         columns: [
           
-          { "data": "device_name" },
-          { "data": "device_dep" },
-          { "data": "device_uid"},
-          { "data": "device_date" },
-          { "data": "device_mode" },
-          { "data": "device_id" }
-
+          { "data": "tool_name" },
+          { "data": "tool_descrip" },
+          { "data": "quantity" },
+          
         ],
         
         
         columnDefs: [
-          {
-            targets: 0,
-            render: function(data,type, row, meta){
-              return '<b>'+data+'</b>'
-            }
-          },
-          {
-            targets: 2, // The column index where you want to render the button
-            render: function (data, type, row, meta) {
 
-              return data;
-
-            }
-          },
           {
             targets: 3, // The column index where you want to render the button
             render: function (data, type, row, meta) {
-              let date = data.replace('-','/')
-              date = date.replace('-','/');
-              return date;
-
-            }
-          },
-          {
-            targets: 4, // The column index where you want to render the button
-            render: function (data, type, row, meta) {
-
-              var checked0 =  data === 0 ? 'checked' : '';
-              var checked1 =  data === 1 ? 'checked' : '';
-
-              return '<div class="mode_select">'+
-    					      	'<input type="radio" id="'+row.id+'-one" name="'+row.id+'" class="mode_sel" data-id="'+row.id+'" value="0" '+checked0+' />'+
-					            '<label for="">Enrollment</label><br>'+
-		                  '<input type="radio" id="'+row.id+'" name="'+row.id+'" class="mode_sel" data-id="'+row.id+'" value="1" '+checked1+' />'+
-					           '<label for="">Attendance</label>' +
-					            '</div>';
-
-            }
-          },
-          {
-            targets: 5, // The column index where you want to render the button
-            render: function (data, type, row, meta) {
-              return '<td><button type="button" class="dev_uid_up btn btn-warning" id="del_'+ row.id +'" data-id="'+row.id+'" title="Update this device Token"><span class="glyphicon glyphicon-refresh"> </span>Update</button>'+
-							        '</td>'+'<button type="button" class="dev_del btn btn-danger" id="del_'+ row.id +'" data-id="'+row.id+'" title="Delete this device"><span class="glyphicon glyphicon-trash"></span>Delete</button>';
+              return '<button type="button" class="dev_del btn btn-danger" id="del_'+ row.id +'" data-id="'+row.id+'" title="Delete this device"><span class="glyphicon glyphicon-trash"></span>Delete</button>' 
+              // +'<td><button type="button" class="dev_uid_up btn btn-warning" id="del_'+ row.id +'" data-id="'+row.id+'" title="Update this device Token"><span class="glyphicon glyphicon-refresh"> </span>Update</button>';
 
             }
           }
-          
         ]
-        
       });
 
       // Make an AJAX request to fetch data
       $.ajax({
-        url: 'dev_up2.php', // Replace with your data source URL
+        url: 'tool_up.php', // Replace with your data source URL
         type: 'GET', // You can use 'POST' if needed
         dataType: 'json',
         data: {
@@ -389,6 +300,7 @@ if (!isset($_SESSION['Admin-name'])) {
           console.log('AJAX Error: ' + errorThrown);
         }
       });
+      
 
 
     });

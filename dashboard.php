@@ -35,19 +35,36 @@ if (!isset($_SESSION['Admin-name'])) {
         }
       }
 
+      .text-yellow{
+        color: white;
+      }
+      .featurette-heading {
+            text-align: justify;
+            text-align-last: left; 
+            text-justify: inter-word; 
+            margin-top: 0px;
+        }
+
+        .lead {
+            text-align: justify;
+            text-align-last: left;
+            text-justify: inter-word;
+            margin-top: 50px;
+        }
 
     </style>
 
+ 
     
     <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
   </head>
-  <body>
+  <body style='background-color:#083248'>
     
-  <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
+  <header class='text-yellow'>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Avionics</a>
+      <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -61,73 +78,79 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
+              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
-            <?php  
-                if (isset($_SESSION['Admin-name'])) {
+            <li class="nav-item">
+              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
+            </li>
 
-                    echo '<li type="" class="nav-item">';
-                    echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
-                    echo '</li>';
-
-                    echo '<li type="" class="nav-item">';
-                    echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
-                    echo '</li>';
-                }
-                else{
-                    echo '<a href="login2.php">Log In</a>';
-                }
-            ?>
           </ul>
-          
 
         </div>
+        <div class="d-flex">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+            <?php
+            if (isset($_SESSION['Admin-name'])) {
+              // echo '<li class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
+              // echo '</li>';
+              // echo '<li class="nav-item">';
+              // echo '<a class="nav-link" href="logout.php">Log Out</a>';
+              // echo '</li>';
+            
+              // echo '<li type="" class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              // echo '</li>';
+
+              echo '<li type="" class="nav-item">';
+              echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
+              echo '</li>';
+            } else {
+              echo '<a href="login2.php">Log In</a>';
+            }
+            ?>
+            </li>
+          <ul>
+        </div>
+          </div>
       </div>
     </nav>
   </header>
 
-<main>
+<main class='text-yellow'> 
 
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-      <img src="./PhilSCA.jpg" alt="Los Angeles">
+      <img src="./Philscahangar.jpg" alt="Los Angeles">
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-      <img src="./PhilSCA.jpg" alt="Los Angeles">
-        <div class="container">
-        
-          <div class="carousel-caption">
             <h1>Avionics Inventory System</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
+            <p>Some representative placeholder content for the first slide of the carousel.</p>
             
           </div>
         </div>
       </div>
+    
       <div class="carousel-item">
-      <img src="./PhilSCA.jpg" alt="Los Angeles">
+      <img src="./Philscacessna.jpg" alt="Los Angeles">
         <div class="container">
 
           <div class="carousel-caption text-end">
             <h1>One more for good measure.</h1>
             <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+          
           </div>
         </div>
       </div>
@@ -152,8 +175,8 @@ if (!isset($_SESSION['Admin-name'])) {
     <div class="row featurette">
       <div class="">
         <div class="text-center">
-          <h1>Toolkeepers.</h1>
-          <p>Some representative placeholder content for the first slide of the carousel.</p>
+          <h1>Avionics Instructors</h1>
+          <p>The instructors of the Aviation Electronics Technology of PhilSCA Villamor Campus</p>
           
         </div>
       </div>
@@ -164,43 +187,113 @@ if (!isset($_SESSION['Admin-name'])) {
     <div class="row">
       <div class="col-lg-4">
         
-      <img class="rounded-circle" width="150px" height="150px" alt="avatar1" src="./toolkeeper.webp" />
+      <img class="rounded-circle" width="200px" height="250px" alt="avatar1" src="./toolkeeper.webp" />
 
 
         <h2>Heading</h2>
-        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+        
+        
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-      <img class="rounded-circle" width="150px" height="150px" alt="avatar1" src="./toolkeeper.webp" />
+      <img class="rounded-circle" width="200px" height="250px" alt="avatar1" src="./toolkeeper.webp" />
 
         <h2>Heading</h2>
-        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+        
+        
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-      <img class="rounded-circle" width="150px" height="150px" alt="avatar1"  src="./toolkeeper.webp"  />
+      <img class="rounded-circle" width="200px" height="250px" alt="avatar1"  src="./toolkeeper.webp"  />
 
         <h2>Heading</h2>
-        <p>And lastly this, the third column of representative placeholder content.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+        
+       
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
+      
+    <div class="container marketing">
+    <p></p><p></p><p></p>
+<div class="row featurette">
+  <div class="">
+    <div class="text-center">
+      <h1>Administrators</h1>
+      <p>The researchers behind the project</p>
+      
+    </div>
+  </div>
+  
+</div>
 
+<!-- Three columns of text below the carousel -->
+<div class="row">
+  <div class="col-lg-4">
+    
+  <img class="rounded-circle" width="200px" height="250px" alt="avatar1" src="./Patrick gradpic.jpg" />
+
+
+    <h2>Patrick</h2>
+    <p>Thesis Leader</p>
+    
+  </div><!-- /.col-lg-4 -->
+  <div class="col-lg-4">
+  <img class="rounded-circle" width="200px" height="250px" alt="avatar1" src="./Allen gradpic.jpg" />
+
+    <h2>Allen</h2>
+    <p>Thesis Member</p>
+    
+  </div><!-- /.col-lg-4 -->
+  <div class="col-lg-4">
+  <img class="rounded-circle" width="200px" height="250px" alt="avatar1"  src="./CJ gradpic.jpg"  />
+
+    <h2>Carl</h2>
+    <p>Thesis Member</p>
+    <p>Fuck THESIS!!!</p>
+
+  </div><!-- /.col-lg-4 -->
+
+  
+</div><!-- /.row -->
+
+<div class="row">
+<div class="col-lg-4 offset-4">
+  <img class="rounded-circle" width="200px" height="250px" alt="avatar1"  src="./Choy gradpic.jpg"  />4
+    <h2>Choy</h2>
+    <p>Thesis Member</p>
+    
+  
+  </div><!-- /.col-lg-4 -->
+</div>
 
     <!-- START THE FEATURETTES -->
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider" style='margin-top: 50px;'>
 
     <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
-      </div>
-      <div class="col-md-5">
-        <!-- <img src="./PhilSCA-Official-Logo-759x1024 (1).png" class="bd-placeholder-img"  height="100%" aria-hidden="true" style="filter:brightness(50%);"></img> -->
+      <div class="col-md-11">
+        <h1 class="featurette-heading" style='margin-top: 0px;'>Unparalleled Security, Streamlined Management <span class="text-muted" >It’ll blow your mind.</span></h1>
+        <p></p>
+        <p class="lead" style='margin-top: 50px;'>In the dynamic and safety-critical world of aviation, tool room security and management are paramount. Introducing a revolutionary solution that elevates tool room security to unprecedented levels while streamlining inventory management processes: the integration of Radio Frequency Identification (RFID) technology with the Avionics Inventory System (AIS).</p>
 
+        <p class="lead">A system that:</p>
+        <!-- Other paragraphs with the same styling -->
+
+        <p class="lead">Utilizes RFID tags to uniquely identify and track every tool in the tool room, preventing unauthorized access and ensuring the whereabouts of every critical piece of equipment.
+
+        Leverages RFID technology to automate tool check-in and check-out procedures, eliminating manual processes and reducing the risk of human error.
+
+        Integrates seamlessly with the AIS, providing real-time visibility into tool inventory levels and usage patterns, enabling data-driven decision-making for procurement and maintenance planning.</p>
+
+       <p class="lead">Empowers tool room personnel with real-time alerts and notifications, ensuring immediate action in case of tool misplacement or unauthorized access attempts.
+
+        Streamlines the tool calibration process, ensuring that only calibrated and certified tools are used on aircraft, enhancing overall safety and compliance.
+
+        Provides comprehensive audit trails for all tool movements and usage, fostering accountability and transparency within the tool room.</p>
+
+       <p class="lead"> This groundbreaking integration of RFID technology and AIS marks a new era in tool room security and management. By combining the power of real-time tracking, automated inventory management, and enhanced security measures, this system empowers aviation organizations to achieve unparalleled levels of efficiency, safety, and compliance.
+
+        The future of tool room security and management is here. Embrace the power of RFID and AIS to transform your operations today.</p>
       </div>
+      
+  
     </div>
 
 
@@ -214,7 +307,8 @@ if (!isset($_SESSION['Admin-name'])) {
   <!-- FOOTER -->
   <footer class="container">
     <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <img src="./AIS_YELLOW-removebg-preview.png" alt="" width='80px' height='50px'>
+    <p>Avionics Inventory System </p>
   </footer>
 </main>
 
@@ -260,13 +354,13 @@ if (!isset($_SESSION['Admin-name'])) {
       </div>
       <div class="modal-body">
       <form action="logout.php" method="POST" enctype="multipart/form-data">
-	      <div class="modal-body">
-		  <h1>Logout your account.</h1>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="submit" name="update" class="btn btn-success">Yes</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-	      </div>
+        <div class="modal-body">
+      <h3 style='text-secondary'>Logout your account.</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" name="update" class="btn btn-success">Yes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
 	  </form>
       </div>
       <!-- <div class="modal-footer">

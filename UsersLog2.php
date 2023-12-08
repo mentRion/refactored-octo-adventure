@@ -34,20 +34,23 @@ if (!isset($_SESSION['Admin-name'])) {
         font-size: 3.5rem;
       }
     }
+    .text-yellow{
+        color: white;
+      }
   </style>
 
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 </head>
 
-<body>
+<body style='background-color:#083248'>
 
 
 
-  <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
+  <header  class='text-yellow'>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
       <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.php">Avionics</a>
+      <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -61,11 +64,22 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
+              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="d-flex">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
             <?php
             if (isset($_SESSION['Admin-name'])) {
               // echo '<li class="nav-item">';
@@ -75,9 +89,9 @@ if (!isset($_SESSION['Admin-name'])) {
               // echo '<a class="nav-link" href="logout.php">Log Out</a>';
               // echo '</li>';
             
-              echo '<li type="" class="nav-item">';
-              echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
-              echo '</li>';
+              // echo '<li type="" class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              // echo '</li>';
 
               echo '<li type="" class="nav-item">';
               echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
@@ -86,18 +100,19 @@ if (!isset($_SESSION['Admin-name'])) {
               echo '<a href="login2.php">Log In</a>';
             }
             ?>
-          </ul>
-
+            </li>
+          <ul>
         </div>
+          </div>
       </div>
     </nav>
   </header>
 
 
 
-  <section class="container pt-lg-5">
+  <section class="container pt-lg-5"  class='text-yellow'>
     <!--User table-->
-    <h3 class="slideInDown animated">Here are the Users daily logs</h3>
+    <!-- <h3 class="slideInDown animated">Here are the Users daily logs</h3> -->
     
     <!-- Log filter -->
     <div class="modal fade bd-example-modal-lg" id="Filter-export" tabindex="-1" role="dialog"
@@ -132,7 +147,7 @@ if (!isset($_SESSION['Admin-name'])) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Tool</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -239,7 +254,74 @@ if (!isset($_SESSION['Admin-name'])) {
   </div>
 
 
-  <section class="container py-lg-5">
+
+    <!-- Modal -->
+    <div class="modal fade" id="addBorrowedTool" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6">
+                    <div class="panel panel-primary">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="panel panel-primary">
+
+                    <label for="tool_name"><b>Select Tool:</b></label > 
+                    <input class="borrower" name="borrower" id="borrower"></input>
+                    <select class="card_sel form-control" name="card_sel" id="card_sel">
+                    <?php
+                      require 'connectDB.php';
+                      $sql = "SELECT * FROM tool";
+                      $result = mysqli_stmt_init($conn);
+                      if (!mysqli_stmt_prepare($result, $sql)) {
+                        echo '<p class="error">SQL Error</p>';
+                      } else {
+                        mysqli_stmt_execute($result);
+                        $resultl = mysqli_stmt_get_result($result);
+                        while ($row = mysqli_fetch_assoc($resultl)) {
+                          ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['tool_name']; ?></option>
+                          <?php
+                        }
+                      }
+                      ?>
+                      </select>
+                     
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" name="user_log" id="user_log" class="btn btn-success">Filter</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+
+        </div>
+        <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+      </div>
+    </div>
+  </div>
+
+
+
+  <section class="container py-lg-5"  class='text-yellow'>
     <!-- Log filter -->
     <div class="modal fade bd-example-modal-lg" id="Filter-export" tabindex="-1" role="dialog"
       aria-labelledby="Filter/Export" aria-hidden="true">
@@ -335,16 +417,16 @@ if (!isset($_SESSION['Admin-name'])) {
       </div>
     </div> -->
 
-    <hr>
+    
 
     <!-- //Log filter -->
-    <div class="slideInRight animated">
+    <div class="slideInRight animated"  class='text-yellow'>
 
       <div id="userslog"></div>
 
-      <table id="usersLog" class="display table-responsive-sm">
+      <table id="usersLog" class="display table-responsive-sm text-yellow" style='background: #dba858'>
 
-        <thead>
+        <thead style='background: #E89C31'>
           <tr>
             <th>+</th>
             <!-- <th>Id</th> -->
@@ -429,6 +511,15 @@ if (!isset($_SESSION['Admin-name'])) {
       </div>
     </div>
   </div>
+
+  
+
+  <footer class="container">
+  <hr class="featurette-divider" style='margin-top: 150px;'>
+      <p class="float-end"><a href="#">Back to top</a></p>
+      <img src="./AIS_YELLOW-removebg-preview.png" alt="" width='80px' height='50px'>
+      <p>Avionics Inventory System </p>
+    </footer>
 
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./dist/js/jquery-3.7.0.js"></script>
@@ -516,7 +607,7 @@ if (!isset($_SESSION['Admin-name'])) {
             targets: 0, // The column index where you want to render the button
             render: function (data, type, row, meta) {
               // return '<form><button type="button" class="btn btn-primary select_btn" id="' + data + '" title="select this UID">' + data + '</button></form>';
-              return '<button type="button" class="btn btn-primary">' + '+' + '</button>';
+              return '<button type="button" class="btn" style="background-color:#e89c31">' + '+' + '</button>';
             }
           },
 
@@ -535,10 +626,13 @@ if (!isset($_SESSION['Admin-name'])) {
               return '<b>' + data + '</b>';
             }
           }
+          
 
         ],
         order: [[1, 'asc']]
       });
+
+
 
       // Add a click event listener to the table body
     $('#usersLog tbody').on('click', 'tr', function () {
@@ -632,15 +726,25 @@ if (!isset($_SESSION['Admin-name'])) {
           
       
 
-            getdata.forEach(
-          (p) => { _lineitem0 += '<tr>'+
+        getdata.forEach(
+          (p) => {
+            let checkdate = p.checkindate
+            checkdate = checkdate.replace('-','/');
+            checkdate = checkdate.replace('-','/');
+
+            let button = ''
+            if(p.timeout == '00:00:00'){
+              button = '<button class="tool_borrow" data-username="'+p.username+'" data-id="'+p.id+'" data-card_uid="'+p.card_uid+'" data-checkdate="'+p.checkdate+'" data-timein="'+p.timein+'" data-timeout="'+p.timeout+'">+</button>'
+            }
+           
+             _lineitem0 += '<tr>'+
                     '<th scope="row">+</th>'+
                     '<td><b>'+p.username+'</b></td>'+
                     '<td>'+p.id+'</td>'+
-                    '<td>'+p.itemhold+'</td>'+
+                    '<td>' + button + '</td>'+
                     // '<td>'+p.serialnumber+'</td>'+
                     '<td>'+p.card_uid+'</td>'+
-                    '<td>'+p.checkindate+'</td>'+
+                    '<td>'+ checkdate +'</td>'+
                     // '<td>'+p.device_dep+'</td>'+
                     // '<td>'+p.checkindate+'</td>'+
                     '<td><b>'+p.timein+'</b></td>'+
@@ -659,6 +763,27 @@ if (!isset($_SESSION['Admin-name'])) {
         // return '<div>' + data.username + ' Details</div>';
         return _lineitem0;
     }
+
+    $(document).on('click', '.tool_borrow', function(res) {
+
+
+      $('#addBorrowedTool').modal('show'); 
+      
+      console.log($(this).data('id'))
+      console.log($(this).data('username'))
+      console.log($(this).data('card_uid'))
+      console.log($(this).data('checkdate'))
+      console.log($(this).data('timein'))
+      console.log($(this).data('timeout'))
+
+      $('#borrower.value').val($(this).data('id'));
+
+
+
+      // alert(this);
+    })
+
+    
     
       // Make an AJAX request to fetch data
       //http://localhost/rfidattendance/user_log_up2.php?select_date=0&log_date=2023-01-01&date_sel_start=2023-01-01&date_sel_end=2023-12-31&time_sel=&card_sel=0&dev_uid=0

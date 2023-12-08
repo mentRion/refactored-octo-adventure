@@ -32,13 +32,28 @@ if (isset($_SESSION['Admin-name'])) {
         font-size: 3.5rem;
       }
     }
+
+    .hero-image {
+      background-image: url("./Philscahangar.jpg");
+      background-color: #031b28;
+      height: 500px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .modal-content {
+            background-color: #083248;
+            color: #fff;
+            /* Add any other styles you need */
+        }
   </style>
 
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 
 </head>
-<body>
+<body class='hero-image'>
 
 
 <!-- <main>
@@ -124,7 +139,10 @@ if (isset($_SESSION['Admin-name'])) {
 <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Login</h5>
+
+        
+          
+          <h4 class="col-lg-12 col-md-3 col-xs-3 thumb text-center">Login</h4>
           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button> -->
@@ -179,18 +197,32 @@ if (isset($_SESSION['Admin-name'])) {
 
         </div>
         <div class="modal-body">
+        <div class="row my-5">
+            <div class="col-12 center">
+              <div class="position-relative">
+                <div class="position-absolute top-50 start-50 translate-middle"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='px' height='80px'></div>
+              </div>            
+            </div>
+          </div>
+          <div class="row my-5">
+            <div class="col-12 center">
+              <div class="position-relative">
+                <div class="position-absolute top-50 start-50 translate-middle">Avionics Inventory System</div>
+              </div>            
+            </div>
+          </div>
         <form class="reset-form" action="reset_pass.php" method="post" enctype="multipart/form-data">
           <input class="form-control" type="email" name="email" placeholder="E-mail..." required/>
           <button class="btn btn-primary form-control" type="submit" name="reset_pass">Reset</button>
-          <p class="message"><a href="#">LogIn</a></p>
+          <p class="message" ><a href="#">LogIn</a></p>
         </form>
         <form class="login-form" action="ac_login2.php" method="post" enctype="multipart/form-data">
           <label for="email">Email</label>
           <input class="form-control mb-3" type="email" name="email" id="email" placeholder="E-mail..." required/>
           <label for="pwd">Password</label>
           <input class="form-control mb-3" type="password" name="pwd" id="pwd" placeholder="Password" required/>
-          <button class="btn btn-primary form-control mb-3" type="submit" name="login" id="login">login</button>
-          <p class="message">Forgot your Password? <a href="#">Reset your password</a></p>
+          <button class="btn btn-primary form-control mb-3" type="submit" name="login" id="login" style="background-color: #dba858;">Sign in</button>
+          <p class="message">Forgot your Password?</p> <a href="#"><p class="float-end">Reset your password</a></p>
         </form>
         </div>
         <!-- <div class="modal-footer">

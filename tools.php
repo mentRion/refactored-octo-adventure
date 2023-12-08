@@ -34,9 +34,6 @@ if (!isset($_SESSION['Admin-name'])) {
         font-size: 3.5rem;
       }
     }
-    .text-yellow{
-        color: white;
-      }
   </style>
 
 </script>
@@ -60,12 +57,12 @@ if (!isset($_SESSION['Admin-name'])) {
   <link href="carousel.css" rel="stylesheet">
 </head>
 
-<body style='background-color:#083248' class='text-yellow'>
+<body>
 
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
+   <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
       <div class="container-fluid">
-      <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
+      <a class="navbar-brand" href="dashboard.php"><img src="./AIS.png" alt="" width='100px' height='65px'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -79,14 +76,12 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
-            </li>
+     
           </ul>
 
         </div>
@@ -149,8 +144,8 @@ if (!isset($_SESSION['Admin-name'])) {
           <!-- <div id="devices">
           </div> -->
 
-            <table id="devices2" class="table-responsive-sm display" style='background: #dba858'>
-              <thead style='background: #e89c31'>
+            <table id="devices2" class="table-responsive-sm display">
+              <thead style='background: #99ccff'>
               <tr>
                 <th>Name</th>
                 <th>Department</th>
@@ -327,16 +322,9 @@ if (!isset($_SESSION['Admin-name'])) {
             targets: 2, // The column index where you want to render the button
             render: function (data, type, row, meta) {
 
-              return data;
-
-            }
-          },
-          {
-            targets: 3, // The column index where you want to render the button
-            render: function (data, type, row, meta) {
-              let date = data.replace('-','/')
-              date = date.replace('-','/');
-              return date;
+              return '<td><button type="button" class="dev_uid_up btn btn-warning" id="del_'+ row.id +'" data-id="'+row.id+'" title="Update this device Token"><span class="glyphicon glyphicon-refresh"> </span>Update</button>'+
+                      data +
+							        '</td>';
 
             }
           },
@@ -359,14 +347,11 @@ if (!isset($_SESSION['Admin-name'])) {
           {
             targets: 5, // The column index where you want to render the button
             render: function (data, type, row, meta) {
-              return '<td><button type="button" class="dev_uid_up btn btn-warning" id="del_'+ row.id +'" data-id="'+row.id+'" title="Update this device Token"><span class="glyphicon glyphicon-refresh"> </span>Update</button>'+
-							        '</td>'+'<button type="button" class="dev_del btn btn-danger" id="del_'+ row.id +'" data-id="'+row.id+'" title="Delete this device"><span class="glyphicon glyphicon-trash"></span>Delete</button>';
+              return '<button type="button" class="dev_del btn btn-danger" id="del_'+ row.id +'" data-id="'+row.id+'" title="Delete this device"><span class="glyphicon glyphicon-trash"></span>Delete</button>';
 
             }
           }
-          
         ]
-        
       });
 
       // Make an AJAX request to fetch data
