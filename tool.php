@@ -33,18 +33,22 @@ if (!isset($_SESSION['Admin-name'])) {
         font-size: 3.5rem;
       }
     }
+
+    .text-yellow{
+        color: white;
+      }
   </style>
 
   <!-- Custom styles for this template -->
   <link href="carousel.css" rel="stylesheet">
 </head>
 
-<body>
+<body style='background-color:#083248' class='text-yellow'>
 
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #425b62">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #031b28">
       <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.php">Avionics</a>
+      <a class="navbar-brand" href="dashboard.php"><img src="./AIS_YELLOW-removebg-preview.png" alt="" width='100px' height='65px'></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -58,17 +62,37 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users Log</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Devices</a>
+              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tool.php" tabindex="-1">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tool_log.php" tabindex="-1">Tool Log</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="d-flex">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
             <?php
             if (isset($_SESSION['Admin-name'])) {
-
-              echo '<li type="" class="nav-item">';
-              echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
-              echo '</li>';
+              // echo '<li class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-toggle="modal" data-target="#admin-account">'.$_SESSION['Admin-name'].'</a>';
+              // echo '</li>';
+              // echo '<li class="nav-item">';
+              // echo '<a class="nav-link" href="logout.php">Log Out</a>';
+              // echo '</li>';
+            
+              // echo '<li type="" class="nav-item">';
+              // echo '<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#admin-account">' . $_SESSION['Admin-name'] . '</a>';
+              // echo '</li>';
 
               echo '<li type="" class="nav-item">';
               echo '<a class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-account" >Log Out</a>';
@@ -77,19 +101,20 @@ if (!isset($_SESSION['Admin-name'])) {
               echo '<a href="login2.php">Log In</a>';
             }
             ?>
-          </ul>
-
+            </li>
+          <ul>
         </div>
+          </div>
       </div>
     </nav>
   </header>
 
   <main>
-    <div class="container marketing">
+    <div class="container marketing mt-5">
     <div class="row">
 			<div class="col-lg-12 mt-4">
 				<div class="panel">
-			      <div class="panel-heading" style="font-size: 19px;">Tools:
+			      <div class="panel-heading" style="font-size: 19px;">
 			      	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#new-device" style="font-size: 18px; float: right; margin-top: -6px;">New Tool</button>
 			      </div>
 			      <div class="panel-body">
@@ -98,15 +123,14 @@ if (!isset($_SESSION['Admin-name'])) {
 			    </div>
 			</div>
 		</div>
-      <hr class="featurette-divider">
       <div class="panel-heading">
         <div class="row featurette">
           <div class="col">
           <!-- <div id="devices">
           </div> -->
 
-            <table id="devices2" class="table-responsive-sm display">
-              <thead>
+            <table id="devices2" class="table-responsive-sm display" style='background: #dba858'>
+              <thead style='background: #e89c31'>
               <tr>
                 <th>Tool Name</th>
                 <th>Tool Description</th>

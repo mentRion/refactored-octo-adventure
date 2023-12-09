@@ -85,7 +85,10 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
+              <a class="nav-link" href="tool.php" tabindex="-1">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tool_log.php" tabindex="-1">Tool Log</a>
             </li>
           </ul>
 
@@ -126,8 +129,7 @@ if (!isset($_SESSION['Admin-name'])) {
 
     <div class="container marketing mt-5">
       <!-- <hr class="featurette-divider"> -->
-      
-
+    
         <div class="row my-3">
         <div class="col-lg-12">
           <div class="panel">
@@ -140,8 +142,6 @@ if (!isset($_SESSION['Admin-name'])) {
             </div>
         </div>
       </div>
-
-
 
       <div class="panel-heading">
         <div class="row featurette">

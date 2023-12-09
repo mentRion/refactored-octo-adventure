@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2023 at 01:56 AM
+-- Generation Time: Dec 09, 2023 at 02:16 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.33
 
@@ -45,6 +45,29 @@ INSERT INTO `admin` (`id`, `admin_name`, `admin_email`, `admin_pwd`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `borrowed_tools`
+--
+
+CREATE TABLE `borrowed_tools` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `toolid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `borrowed_tools`
+--
+
+INSERT INTO `borrowed_tools` (`id`, `userid`, `toolid`) VALUES
+(1, 44, 22),
+(2, 44, 23),
+(3, 35, 23),
+(4, 35, 22),
+(5, 42, 22);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `devices`
 --
 
@@ -63,7 +86,9 @@ CREATE TABLE `devices` (
 
 INSERT INTO `devices` (`id`, `device_name`, `device_dep`, `device_uid`, `device_date`, `device_mode`) VALUES
 (6, 'BSAET ', '4-2', '477d95fc98dc5087', '2023-10-13', 1),
-(7, 'dwad', 'ddaw', 'd68518af507755a5', '2023-11-26', 0);
+(7, 'dwad', 'ddaw', 'd68518af507755a5', '2023-11-26', 0),
+(8, 'dwadwa', 'dawd', 'baa6f674add46c7f', '2023-12-08', 0),
+(9, 'dwa', 'daw', '8b4d0abdb83bd20d', '2023-12-08', 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +180,7 @@ INSERT INTO `users_logs` (`id`, `username`, `serialnumber`, `card_uid`, `device_
 (39, 'CHOY', 1, '20112393', '477d95fc98dc5087', '4-2', '2023-10-14', '09:54:47', '09:56:16', 1, 'keyboard'),
 (40, 'PATRICK', 2, '3140142252', '477d95fc98dc5087', '4-2', '2023-10-14', '09:56:00', '09:56:21', 1, 'tumbler'),
 (41, 'CHOY', 1, '20112393', '477d95fc98dc5087', '4-2', '2023-10-14', '09:56:24', '09:56:29', 1, 'tumbler'),
-(42, 'PATRICK', 2, '3140142252', '477d95fc98dc5087', '4-2', '2023-10-14', '09:56:45', '10:33:52', 1, 'keyboard'),
+(42, 'PATRICK', 2, '3140142252', '477d95fc98dc5087', '4-2', '2023-10-14', '09:56:45', '00:00:00', 1, 'keyboard'),
 (43, 'CHOY', 1, '20112393', '477d95fc98dc5087', '4-2', '2023-10-14', '09:56:49', '10:33:49', 1, 'keyboard'),
 (44, 'CJ', 4, '144114138', '477d95fc98dc5087', '4-2', '2023-10-14', '10:33:44', '00:00:00', 0, 'keyboard'),
 (45, 'CHOY', 1, '20112393', '477d95fc98dc5087', '4-2', '2023-10-14', '10:35:18', '15:39:45', 1, NULL);
@@ -168,6 +193,12 @@ INSERT INTO `users_logs` (`id`, `username`, `serialnumber`, `card_uid`, `device_
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `borrowed_tools`
+--
+ALTER TABLE `borrowed_tools`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -205,10 +236,16 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `borrowed_tools`
+--
+ALTER TABLE `borrowed_tools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tool`

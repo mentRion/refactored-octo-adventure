@@ -4,7 +4,13 @@ session_start();
 
 <?php  
 	require 'connectDB.php';
-	$sql = "SELECT * FROM tool ORDER BY id DESC";
+	
+	$sql = "SELECT DISTINCT t1.username, count(t0.toolid) count, t1.serialnumber
+	FROM borrowed_tools t0 
+	LEFT JOIN users_logs t1 on t1.id = t0.userid
+	LEFT join tool t2 on t2.id = t0.toolid
+	GROUP BY t0.userid";
+
 	$result = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($result, $sql)) {
 		echo '<p class="error">SQL Error</p>';

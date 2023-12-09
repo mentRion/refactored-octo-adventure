@@ -86,6 +86,9 @@ if (!isset($_SESSION['Admin-name'])) {
             <li class="nav-item">
               <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tool_log.php" tabindex="-1">Tool Log</a>
+            </li>
 
           </ul>
 

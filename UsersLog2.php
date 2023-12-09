@@ -70,7 +70,10 @@ if (!isset($_SESSION['Admin-name'])) {
               <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
+              <a class="nav-link" href="tool.php" tabindex="-1">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tool_log.php" tabindex="-1">Tool Log</a>
             </li>
           </ul>
 
@@ -260,7 +263,7 @@ if (!isset($_SESSION['Admin-name'])) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Tool</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -277,9 +280,12 @@ if (!isset($_SESSION['Admin-name'])) {
                   <div class="col">
                     <div class="panel panel-primary">
 
-                    <label for="tool_name"><b>Select Tool:</b></label > 
-                    <input class="borrower" name="borrower" id="borrower"></input>
-                    <select class="card_sel form-control" name="card_sel" id="card_sel">
+                    <label for="borrower_id"><b>Borrower Id:</b></label > 
+                    <input class="borrower form-control" name="borrower_id" id="borrower_id" disabled></input>
+                    <label for="borrower_username"><b>Borrower Username:</b></label> 
+                    <input class="borrower form-control" name="borrower_username" id="borrower_username" disabled></input>
+                    <label for="tool_sel"><b>Borrower Username:</b></label>
+                    <select class="card_sel form-control" name="tool_sel" id="tool_sel">
                     <?php
                       require 'connectDB.php';
                       $sql = "SELECT * FROM tool";
@@ -305,8 +311,8 @@ if (!isset($_SESSION['Admin-name'])) {
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" name="user_log" id="user_log" class="btn btn-success">Filter</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-success tool_borrow_confirm" name="tool_borrow_confirm" id="tool_borrow_confirm" data-dismiss="modal">Confirm</button>
+              <button type="button" class="btn btn-danger tool_borrow_cancel" name="tool_borrow_cancel" id="tool_borrow_confirm" data-dismiss="modal">Cancel</button>
             </div>
           </form>
 
@@ -754,21 +760,36 @@ if (!isset($_SESSION['Admin-name'])) {
         _lineitem0 +=
           '</tbody>' +
           '</table>'
-       
         let _data = getdata;
         console.log('data ' + _data);
         console.log("--" + getdata);
         console.log("--" + ret);
-
         // return '<div>' + data.username + ' Details</div>';
         return _lineitem0;
     }
 
+    function addTool(userid, tool){
+      $.ajax({
+      		url: 'tool_add_up.php', // Replace with your data source URL
+      		type: 'POST', // You can use 'POST' if needed
+          data: {
+            'userid' : userid,
+            'tool' : tool
+          },
+
+      		success: function(data) {
+      			// Clear the existing data in the DataTable
+            console.log('success');
+      		},
+      		error: function(jqXHR, textStatus, errorThrown) {
+      			console.log('AJAX Error: ' + errorThrown);
+      		}
+      	});    
+    }
+
+
     $(document).on('click', '.tool_borrow', function(res) {
-
-
-      $('#addBorrowedTool').modal('show'); 
-      
+      $('#addBorrowedTool').modal('show');       
       console.log($(this).data('id'))
       console.log($(this).data('username'))
       console.log($(this).data('card_uid'))
@@ -776,12 +797,30 @@ if (!isset($_SESSION['Admin-name'])) {
       console.log($(this).data('timein'))
       console.log($(this).data('timeout'))
 
+      $('#borrower_id').val($(this).data('id'));
+      $('#borrower_username').val($(this).data('username'));
       $('#borrower.value').val($(this).data('id'));
-
-
-
       // alert(this);
     })
+
+    $(document).on('click', '.tool_borrow_confirm', function(res){
+      console.log($('#borrower_id').val());
+      console.log($('#borrower_username').val());
+      console.log($('#tool_sel').val());
+
+      let userid = $('#borrower_id').val();
+      let tool = $('#tool_sel').val();
+
+      addTool(userid, tool);
+
+      $('#addBorrowedTool').modal('hide');       
+    })
+
+    $(document).on('click', '.tool_borrow_cancel', function(res){
+      $('#addBorrowedTool').modal('hide');       
+    })
+
+
 
     
     
