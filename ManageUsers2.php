@@ -344,6 +344,7 @@ if (!isset($_SESSION['Admin-name'])) {
 	<script src="./dist/js/pdfmake.min.js"> </script>
 	<script src="./dist/js/vfs_fonts.js"></script>
 	<script src="./dist/js/buttons.html5.min.js"></script>
+	<script src="./js/bootbox.js"></script>	
 
 
 	<!-- <script type="text/javascript" src="./js/bootbox.min.js"></script>

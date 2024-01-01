@@ -239,8 +239,6 @@ if (!isset($_SESSION['Admin-name'])) {
 		  </div>
 		</div>
 
-
-
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./dist/js/jquery-3.7.0.js"></script>
   <script src="./dist/js/jquery.dataTables.min.js"></script>
@@ -290,7 +288,6 @@ if (!isset($_SESSION['Admin-name'])) {
           
         ],
         
-        
         columnDefs: [
 
           {
@@ -324,12 +321,8 @@ if (!isset($_SESSION['Admin-name'])) {
           console.log('AJAX Error: ' + errorThrown);
         }
       });
-      
-
 
     });
-
-
 
   </script>
 

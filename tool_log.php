@@ -350,7 +350,7 @@ if (!isset($_SESSION['Admin-name'])) {
           '<thead>' +
           '<tr>' +
           '<th scope="col">+</th>' +
-          '<th scope="col">username</th>' +
+          // '<th scope="col">username</th>' +
           '<th scope="col">tool name</th>' +
           '<th scope="col">timein</th>' +
           // '<th scope="col">serialnumber</th>'+
@@ -370,7 +370,7 @@ if (!isset($_SESSION['Admin-name'])) {
             let button = ''
             _lineitem0 += '<tr>' +
               '<th scope="row">+</th>' +
-              '<td><b>' + p.username + '</b></td>' +
+              // '<td><b>' + p.username + '</b></td>' +
               '<td>' + p.tool_name + '</td>' +
               '<td>' + p.timein + '</td>' +
               // '<td>'+p.serialnumber+'</td>'+
