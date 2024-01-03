@@ -56,20 +56,20 @@ if (!isset($_SESSION['Admin-name'])) {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Users</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="">Users</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
+              <a class="nav-link" href="tool.php" tabindex="-1">Tools</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tool_log.php" tabindex="-1">Tool Log</a>
@@ -120,9 +120,10 @@ if (!isset($_SESSION['Admin-name'])) {
           <table id="example" class="display" style="width:100%" style='background: #dba858'>
             <thead style='background: #E89C31'>
                 <tr>
-                    <th>User</th>
-                    <th>Mobile No.</th>
+                    <th>Name</th>
                     <th>Gender</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
                     <th>Card UID</th>
                     <th>User Date</th>
                     <th>Device Dept.</th>
@@ -146,8 +147,9 @@ if (!isset($_SESSION['Admin-name'])) {
                 ?>
                             <TR>
                             <TD><b><?php echo $row['id']; echo" | "; echo $row['username'];?></b></TD>
-                            <TD><?php echo $row['serialnumber'];?></TD>
                             <TD><?php echo $row['gender'];?></TD>
+                            <TD><?php echo $row['serialnumber'];?></TD>
+                            <TD><?php echo $row['email'];?></TD>
                             <TD><?php echo $row['card_uid'];?></TD>
                             <TD ><?php echo date('d/m/Y',strtotime($row['user_date']));?></TD>
                             <TD><?php echo $row['device_dep'];?></TD>

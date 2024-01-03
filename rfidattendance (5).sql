@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 02:16 AM
+-- Generation Time: Jan 03, 2024 at 06:33 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.33
 
@@ -63,7 +63,12 @@ INSERT INTO `borrowed_tools` (`id`, `userid`, `toolid`) VALUES
 (2, 44, 23),
 (3, 35, 23),
 (4, 35, 22),
-(5, 42, 22);
+(5, 42, 22),
+(6, 42, 22),
+(7, 42, 22),
+(8, 42, 22),
+(9, 42, 22),
+(10, 42, 23);
 
 -- --------------------------------------------------------
 
@@ -101,17 +106,18 @@ CREATE TABLE `tool` (
   `device_date` date NOT NULL,
   `tool_name` varchar(100) NOT NULL,
   `tool_descrip` varchar(1000) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `borrow_qty` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tool`
 --
 
-INSERT INTO `tool` (`id`, `device_date`, `tool_name`, `tool_descrip`, `quantity`) VALUES
-(22, '2023-11-29', 'pliers', 'pincers with parallel, flat, and typically serrated surfaces, used chiefly for gripping small objects or bending wire.', 10),
-(23, '2023-11-29', 'screwdriver', 'a hand tool for turning a screw, consisting of a handle attached to a long, narrow shank, usually of metal, which tapers and flattens out to a tip that fits into the slotted head of a screw.', 10),
-(24, '2023-11-29', 'hammer', 'a tool that has a heavy metal head attached to a handle and that is used for hitting nails or breaking things apart — see picture at carpentry; see also sledgehammer. b : a similar tool made usually of wood and used especially for hitting a surface to make a loud noise. an auctioneer\'s hammer.', 10);
+INSERT INTO `tool` (`id`, `device_date`, `tool_name`, `tool_descrip`, `quantity`, `borrow_qty`) VALUES
+(22, '2023-11-29', 'pliers', 'pincers with parallel, flat, and typically serrated surfaces, used chiefly for gripping small objects or bending wire.', 10, 4),
+(23, '2023-11-29', 'screwdriver', 'a hand tool for turning a screw, consisting of a handle attached to a long, narrow shank, usually of metal, which tapers and flattens out to a tip that fits into the slotted head of a screw.', 10, 2),
+(24, '2023-11-29', 'hammer', 'a tool that has a heavy metal head attached to a handle and that is used for hitting nails or breaking things apart — see picture at carpentry; see also sledgehammer. b : a similar tool made usually of wood and used especially for hitting a surface to make a loud noise. an auctioneer\'s hammer.', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -139,9 +145,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `serialnumber`, `gender`, `email`, `card_uid`, `card_select`, `user_date`, `device_uid`, `device_dep`, `add_card`, `itemhold`) VALUES
-(1, 'CHOY', 1, 'Female', 'None@gmail.com', '20112393', 0, '2023-10-14', '477d95fc98dc5087', '4-2', 1, 'tumbler'),
-(2, 'PATRICK', 2, 'Male', 'None@gmail.com', '3140142252', 0, '2023-10-14', '477d95fc98dc5087', '4-2', 1, 'keyboard'),
-(3, 'ALLEN', 3, 'Male', 'None@gmail.com', '1630248246', 0, '2023-10-14', '477d95fc98dc5087', '4-2', 1, 'pliers'),
+(1, 'CHOY', 0, 'Female', 'None@gmail.com', '20112393', 0, '2023-10-14', '477d95fc98dc5087', '4-2', 1, 'tumbler'),
 (4, 'CJ', 4, 'Male', 'None@gmail.com', '144114138', 1, '2023-10-14', '477d95fc98dc5087', '4-2', 1, 'cutter');
 
 -- --------------------------------------------------------
@@ -239,7 +243,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `borrowed_tools`
 --
 ALTER TABLE `borrowed_tools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `devices`

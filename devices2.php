@@ -72,17 +72,17 @@ if (!isset($_SESSION['Admin-name'])) {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.php">Users</a>
+          <li class="nav-item active">
+              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="ManageUsers2.php">Manage Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
+              <a class="nav-link active" aria-current="page" href="">Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
+              <a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tool.php" tabindex="-1">Tools</a>
@@ -152,12 +152,12 @@ if (!isset($_SESSION['Admin-name'])) {
             <table id="devices2" class="table-responsive-sm display" style='background: #dba858'>
               <thead style='background: #e89c31'>
               <tr>
-                <th>Name</th>
                 <th>Department</th>
-                <th>UID</th>
-                <th>Date</th>
+                <th>Course/Year/Section</th>
+                <th>Course UID</th>
+                <th>Registration Date</th>
                 <th>Mode</th>
-                <th>Config</th>
+                <th></th>
               </tr>
               </thead>
             </table>
@@ -334,8 +334,18 @@ if (!isset($_SESSION['Admin-name'])) {
           {
             targets: 3, // The column index where you want to render the button
             render: function (data, type, row, meta) {
-              let date = data.replace('-','/')
-              date = date.replace('-','/');
+
+              // Create a Date object from the input date string
+              const dateObject = new Date(data);
+
+              // Get the month, day, and year from the Date object
+              const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+              const day = dateObject.getDate();
+              const year = dateObject.getFullYear();
+
+              // Format the date as "month date year"
+              const date = `${month}/${day}/${year}`;
+
               return date;
 
             }

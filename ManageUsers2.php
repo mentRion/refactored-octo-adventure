@@ -53,24 +53,24 @@ if (!isset($_SESSION['Admin-name'])) {
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="index.php">Users</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="ManageUsers2.php">Manage Users</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
-						</li>
-						<li class="nav-item">
-						<a class="nav-link" href="tools.php" tabindex="-1">Tools</a>
-						</li>
-						<li class="nav-item">
+					<li class="nav-item active">
+						<a class="nav-link" href="devices2.php" tabindex="-1">Department</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="ManageUsers2.php">Manage Users</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="">Users</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="UsersLog2.php" tabindex="-1">Users' Log</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="tool.php" tabindex="-1">Tools</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="tool_log.php" tabindex="-1">Tool Log</a>
-						</li>
+					</li>
 						
 					</ul>
 				</div>
@@ -162,10 +162,10 @@ if (!isset($_SESSION['Admin-name'])) {
 									<th>Card UID</th>
 									<th>Name</th>
 									<th>Gender</th>
-									<th>Mobile Number</th>
+									<th>Contact Number</th>
 									<th>Email</th>
-									<th>Date</th>
-									<th>Department</th>
+									<th>Registration Date</th>
+									<th>Course/Year/Section</th>
 								</tr>
 							</thead>
 
@@ -444,15 +444,23 @@ if (!isset($_SESSION['Admin-name'])) {
 						targets: 1, // The column index where you want to render the button
 						render: function (data, type, row, meta) {
 							return '<b>' + data + '</b>';
-
 						}
 					},
 					{
 						targets: 5, // The column index where you want to render the button
 						render: function (data, type, row, meta) {
-							let str =  data.replace('-','/');
-							str =  str.replace('-','/');
-							return str;
+							// Create a Date object from the input date string
+							const dateObject = new Date(data);
+
+							// Get the month, day, and year from the Date object
+							const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+							const day = dateObject.getDate();
+							const year = dateObject.getFullYear();
+
+							// Format the date as "month date year"
+							const date = `${month}/${day}/${year}`;
+
+							return date;
 
 						}
 					}
